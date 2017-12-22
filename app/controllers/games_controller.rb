@@ -6,8 +6,7 @@ class GamesController < ApplicationController
 	end
 	
 	def create
-# I suspect I'm missing significant chunks of data we'll want later in the game_create_params section here
-		@game = current_user.games.create(game_create_params)
+		@game = Game.create(game_create_params)
 		if @game.valid?
 			redirect_to game_path(@game)
 		else
