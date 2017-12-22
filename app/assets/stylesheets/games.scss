@@ -1,3 +1,20 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.board-container {
+    
+}
+
+#board {
+    
+}
+
+#board td {
+    background-color: white;
+}
+
+#board tr:nth-child(odd) td:nth-child(even),
+#board tr:nth-child(even) td:nth-child(odd) {
+    background-color: black;
+}
