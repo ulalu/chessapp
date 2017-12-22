@@ -6,12 +6,11 @@ class GamesController < ApplicationController
 	end
 	
 	def create
-		@game = Game.create(game_create_params)
+		@game = current_user.games.create(game_create_params)
 		if @game.valid?
 			redirect_to game_path(@game)
 		else
-			flash[:alert] = "Couldn't Create Game!"
-			render :new, :status => :unprocessable_entity
+			redirect_to root_path, alert: "Could not create game."
 		end
 	end
 
