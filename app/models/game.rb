@@ -3,15 +3,6 @@ class Game < ApplicationRecord
 
 	validates :name, presence: true
 
-	def allow_join
-		# a user signs in and is on the index page
-		# a series of games are presented on the index page (game index page should show all games in db)
-		# the user clicks on a game and is taken to the game show page
-		# if a user is valid [user id]
-		# allow them to join the game they chose
-		# else, throw an alert
-	end 
-
 #I'm not going to try to initialize this just yet in the rails side of things. First I want to get a good idea of how I can style an array on a page!
 
 
