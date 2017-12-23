@@ -1,59 +1,80 @@
 class Piece < ApplicationRecord
   belongs_to :game
-  
-  def is_obstructed?(end_x, end_y)
+
+  def occupied?(x, y)
+    game.pieces.where(x_position: x, y_position: y).present?
+  end
+
+  def obstructed?(end_x, end_y)
     horizontal_obstruct?(end_x, end_y)
     vertical_obstruct?(end_x, end_y)
     diagonal_obstruct?(end_x, end_y)
   end
-  
-  # Gets piece current pos and checks space between piece current pos to piece dest 
-  def horizontal_obstruct?(end_x, end_y)
-    if self.position_x < end_x # checks from right to left
-      (self.position_x + 1).upto(end_x) do |x|
-        return true if occupied?(x, self.position_y)
+
+  # Checks btw piece and desired position for obstruction on horizontal.
+  # _end_y indicates var wont be used.
+  def horizontal_obstruct?(end_x, _end_y)
+    if position_x < end_x # checks from right to left
+      (position_x + 1).upto(end_x) do |x|
+        return true if occupied?(x, position_y)
       end
-    elsif self.position_x > end_x # checks from left to right
-      (self.position_x - 1).downto(end_x) do |x|
-        return true if occupied?(x, self.position_y)
+    elsif position_x > end_x # checks from left to right
+      (position_x - 1).downto(end_x) do |x|
+        return true if occupied?(x, position_y)
       end
       false
     end
   end
   
-  def vertical_obstruct?(end_x, end_y)
-    if self.position_y < end_y #checks vertical down
-      (self.position_y - 1).upto(end_y - 1) do |y|
-        return true if occupied?(self.position_x, y)
-      end
-    elsif self.position_y > end_y # checks vertical up
-      (self.position_y + 1).downto(end_y, + 1) do |y|
-        return true if occupied?(self.position_x, y)
-      end
-    end
-    # false
+  def vertical_obstruct?(_end_x, end_y)
+    vertical_down_obstruct?(end_x, end_y)
+    vertical_up_obstruct?(end_x, end_y)
   end
 
-def diagonal_obstruct?(end_x, end_y)
-  if self.position_x < end_x # checks diagonal and up
-    (self.position_x + 1).upto(end_x - 1) do |x|
-      diag_y = x - self.position_x
-      y = end_y > self.position_y ? self.position_y + diag_y : self.position_y - diag_y
-      return true if occupied?(x, y)
+  # Checks btw piece and desired position for obstruction on vertical.
+  def vertical_down_obstruct?(_end_x, end_y)
+    if position_y < end_y # checks vertical down
+      (position_y - 1).upto(end_y - 1) do |y|
+        return true if occupied?(position_x, y)
+      end
     end
-  elsif self.position_x > end_x # checks diagonal and up
-    (self.position_x - 1).downto(end_x + 1) do |x|
-      diag_y = self.position_x - x
-      y = end_y > self.position_y ? self.position_y + diag_y : self.position_y - diag_y
-      return true if occupied?(x, y)
-    end
+    false
   end
-  false
-end
 
-  
-  
-  
-  
-  
+  def vertical_up_obstruct?(_end_x, end_y)
+    if position_y > end_y # checks vertical up
+      (position_y + 1).downto(end_y, + 1) do |y|
+        return true if occupied?(position_x, y)
+      end
+    end
+    false
+  end
+
+  # Checks btw piece and desired position for obstruction on diagonal.
+  def diagonal_obstruct?(end_x, end_y)
+    diagonal_down_obstruct?(end_x, end_y)
+    diagonal_up_obstruct?(end_x, end_y)
+  end
+
+  def diagonal_up_obstruct?(end_x, end_y)
+    if position_x < end_x
+      (position_x + 1).upto(end_x - 1) do |x|
+        diag_y = x - position_x
+        y = end_y > position_y ? position_y + diag_y : position_y - diag_y
+        return true if occupied?(x, y)
+      end
+    end
+    false
+  end
+
+  def diagonal_down_obstruct?(end_x, end_y)
+    if position_x > end_x # checks diagonal and up
+      (position_x - 1).downto(end_x + 1) do |x|
+        diag_y = position_x - x
+        y = end_y > position_y ? position_y + diag_y : position_y - diag_y
+        return true if occupied?(x, y)
+      end
+    end
+    false
+  end
 end
