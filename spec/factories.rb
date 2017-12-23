@@ -19,6 +19,7 @@ FactoryBot.define do
     color 'white'
     position_x 0
     position_y 0
+    association :game
   end
   
 end

@@ -2,7 +2,7 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def occupied?(x, y)
-    game.pieces.where(x_position: x, y_position: y).present?
+    board.pieces.where(x_position: x, y_position: y).present?
   end
 
   def obstructed?(end_x, end_y)
