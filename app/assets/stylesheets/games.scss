@@ -12,9 +12,13 @@
 
 #board td {
     background-color: white;
+    height: 40px;
+    width: 40px;
 }
 
 #board tr:nth-child(odd) td:nth-child(even),
 #board tr:nth-child(even) td:nth-child(odd) {
     background-color: black;
+    height: 40px;
+    width: 40px;
 }
