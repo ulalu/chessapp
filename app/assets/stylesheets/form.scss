@@ -1,0 +1,77 @@
+.form-box {
+  background: #fff;
+  border-radius: 0.500em;
+  border: 0.063em solid #ccc;
+  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  padding: 0.625em;
+  width: 30%;
+  min-width: 15.625em;
+  border: 0.063em solid lightgrey;
+  margin: 0 auto;
+  margin-top: 6.250em;
+}
+
+
+.form-input input{
+  width: 100%;
+  border:1px solid #cccccc;
+}
+
+
+.form-labels {
+  font-size: 0.813em;
+  position: relative;
+  top: 0.313em;
+}
+
+
+.form-label {
+  position: relative;
+  top: 0.313em;
+}
+.min-password {
+  font-size: 0.688em;
+}
+
+.action-btn {
+  margin-top: 1.313em;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 2.500em;
+  border-radius: 0.500em;
+  border: none;
+  background: #2980b9;
+  margin-top: 0.625em;
+  margin-bottom: 0.313em;
+  color: #fff;
+}
+
+input {
+  border-radius: 0.313em;
+  height: 2.188em;
+  padding-left: 0.313em;
+  font-size: 0.625em;
+}
+
+input::placeholder {
+  font-size: 0.813em;
+  padding-left: 0.250em;
+  color: #bdc3c7;
+}
+
+
+.already-member {
+  font-size: 0.750em;
+}
+
+.remember-me {
+  position: relative;
+  bottom: 0.688em;
+  font-size: 0.813em;
+}
+
+.forgot-password {
+  font-size: 0.688em;
+}
