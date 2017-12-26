@@ -1,0 +1,7 @@
+<h1>Checkmate Homepage</h1>
+
+<%= link_to 'Start a New Game', new_game_path, class: 'btn btn-primary' %>
+
+<% @games.each do |game| %>
+  <p><%= game.id %><br><%= game.name %><%= link_to 'Join', game_path(game) %></p>
+<% end %>

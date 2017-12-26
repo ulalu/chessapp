@@ -34,9 +34,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'devise'
-gem 'bootstrap', '4.0.0.alpha6'
-gem 'rails-ujs'
 gem 'rubocop', require: false
 
 
@@ -61,3 +58,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem "factory_bot_rails"
 end
+
+gem 'devise'
+gem 'bootstrap', '4.0.0.alpha6'
+gem 'rails-ujs'
+
+gem 'simple_form'
+
