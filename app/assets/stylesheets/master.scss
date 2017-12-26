@@ -1,3 +1,21 @@
 body {
   background: url(bg.png);
 }
+.container {
+  color: white;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Audiowide', cursive;
+}
+.container a {
+  margin-left: 10px;
+}
+.input #game_name {
+  margin-left: 10px;
+}
+.alert {
+  color: red; 
+}
+.btn {
+  margin: 20px;
+}

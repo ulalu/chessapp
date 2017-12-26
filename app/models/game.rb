@@ -1,8 +1,11 @@
 class Game < ApplicationRecord
+	belongs_to :user
+
+	validates :name, presence: true
+
 #I'm not going to try to initialize this just yet in the rails side of things. First I want to get a good idea of how I can style an array on a page!
 
 
-	
 	def board_setup
 		# white
 		(0..7).each do |p|
