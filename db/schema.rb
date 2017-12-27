@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221134612) do
+ActiveRecord::Schema.define(version: 20171226183519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20171221134612) do
 
   create_table "pieces", id: :bigserial, force: :cascade do |t|
     t.string   "type"
-    t.integer  "board_id"
     t.string   "special"
     t.string   "color"
     t.integer  "position_x"
@@ -32,7 +31,8 @@ ActiveRecord::Schema.define(version: 20171221134612) do
     t.boolean  "dead"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["board_id"], name: "index_pieces_on_board_id", using: :btree
+    t.integer  "game_id"
+    t.index ["game_id"], name: "index_pieces_on_game_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
