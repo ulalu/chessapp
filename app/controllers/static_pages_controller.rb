@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
-    def index
-                
-    end
     
+    def index
+      @games = Game.all       
+    end
         
 end
