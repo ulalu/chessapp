@@ -14,5 +14,11 @@
 
 </div>
 
+<h1>Available Games</h1>
+
+<% @games.each do |game| %>
+  <p><%= game.id %><br><%= game.name %><%= link_to 'Join', game_path(game) %></p>
+<% end %>
+
 <br />
 <br />
