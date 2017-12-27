@@ -3,10 +3,8 @@ class Game < ApplicationRecord
 belongs_to :user
 has_many :pieces
 
-#I'm not going to try to initialize this just yet in the rails side of things. First I want to get a good idea of how I can style an array on a page!
-
-validates :name, presence: true
-
+	validates :name, presence: true
+	
 #I'm not going to try to initialize this just yet in the rails side of things. First I want to get a good idea of how I can style an array on a page!
 
 	def board_setup
