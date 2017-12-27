@@ -1,21 +1,28 @@
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Exo');
+
+h1 {
+  color: white;
+  font-size: 72px;
+  font-family: 'Exo', sans-serif;
+  text-align: center;
+  padding-top: 10px;
+}
+
+h2 {
+  color: white;
+  font-family: 'Exo', sans-serif;
+  font-size: 32px;
+  text-align: center;
+}
+
 body {
   background: url(bg.png);
 }
-.container {
+
+.booyah-box {
   color: white;
-  margin: 0 auto;
-  text-align: center;
-  font-family: 'Audiowide', cursive;
 }
-.container a {
+.booyah-box a {
   margin-left: 10px;
-}
-.input #game_name {
-  margin-left: 10px;
-}
-.alert {
-  color: red; 
-}
-.btn {
-  margin: 20px;
 }
