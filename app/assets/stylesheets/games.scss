@@ -7,14 +7,22 @@
 }
 
 #board {
-    
+    background-color: black;
 }
 
 #board td {
-    background-color: white;
+    background-image: url("white.png");
+    background-position: left;
+    height: 100px;
+    width: 100px;
+    border-collapse: collapse;
 }
 
 #board tr:nth-child(odd) td:nth-child(even),
 #board tr:nth-child(even) td:nth-child(odd) {
-    background-color: black;
+    background-image: url("black.png");
+    background-position: left;
+    height: 100px;
+    width: 100px;
+    border-collapse: collapse;
 }
