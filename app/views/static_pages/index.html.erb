@@ -1,7 +1,18 @@
-<h1>Checkmate Homepage</h1>
+<h1>Let's Play Chess</h1>
+<h2>Do you have what it takes to be a grandmaster?</h2>
+<br />
+<br />
 
-<%= link_to 'Start a New Game', new_game_path, class: 'btn btn-primary' %>
+<div class="booyah-box col-10 offset-1">
+	<%= link_to 'Start Game', new_game_path, class: 'btn btn-primary button big' %>
+	<br />
+	<br />
+	<%= link_to 'Career Stats', '#', class: 'btn btn-primary button big' %>
+	<br />
+	<br />
+	<%= link_to 'About Us', '#', class: 'btn btn-primary button big' %>
 
-<% @games.each do |game| %>
-  <p><%= game.id %><br><%= game.name %><%= link_to 'Join', game_path(game) %></p>
-<% end %>
+</div>
+
+<br />
+<br />
