@@ -22,4 +22,8 @@ FactoryBot.define do
     association :game
   end
   
+  factory :king do
+
+  end
+  
 end
