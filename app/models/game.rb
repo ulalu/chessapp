@@ -1,12 +1,10 @@
 class Game < ApplicationRecord
 
-	belongs_to :user
-	has_many :pieces
+  belongs_to :user
+  has_many :pieces
 
-	validates :name, presence: true
+  validates :name, presence: true
 	
-#I'm not going to try to initialize this just yet in the rails side of things. First I want to get a good idea of how I can style an array on a page!
-
   def populate_board
   # white
     (0..7).each do |p|
