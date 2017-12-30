@@ -13,7 +13,7 @@ class Piece < ApplicationRecord
   end
 
   def off_the_board(x, y)
-    return 'invalid' if(x < 0 || y < 0 || x > 7 || y > 7)
+    return 'invalid' if (x < 0 || y < 0 || x > 7 || y > 7 )
   end
 
   # Checks btw piece and desired position for obstruction on horizontal.
