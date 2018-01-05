@@ -5,5 +5,7 @@ class Queen < Piece
 				return true
 		else
 				return false	
-	end
+	 end
+  end
+
 end

@@ -7,4 +7,6 @@ class Rook < Piece
 	  else
 	  		return false
 	  end
- end
+  end
+
+end
