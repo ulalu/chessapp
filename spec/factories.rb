@@ -14,7 +14,6 @@ FactoryBot.define do
   
   factory :piece do
     type 'Rook'
-    board_id 1
     special 'none'
     color 'white'
     position_x 0

@@ -4,14 +4,20 @@
 
 <div class="board-container">
     <table id="board">
-         <% 8.times do |row_index| %>
-             <tr>
-                 <% 8.times do |col_index| %>
-                     <td>
-                     
-                     </td>
-                 <% end %>
-             </tr>
-         <% end %>        
-     </table>
- </div>
+
+    <% 8.times.each do |row| %>
+      <tr>
+        <% 8.times.each do |col| %>
+          <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
+          <% if piece.present? %>
+            <td class="#pawn_spot" data-piece_id="<%= piece %>" data-piece_name="pawn">
+              <%= piece.position_x %>, <%= piece.position_y %>
+            </td>
+          <% else %>
+            <td></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
