@@ -24,5 +24,17 @@ FactoryBot.define do
   factory :king do
 
   end
+
+  factory :bishop do
+
+  end
+
+  factory :rook do
+
+  end
+
+  factory :queen do
+
+  end
   
 end
