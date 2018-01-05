@@ -9,7 +9,7 @@
         <% 8.times.each do |col| %>
           <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
           <% if piece.present? %>
-            <td class="#piece" piece_id="<%= piece.id %>" piece_name="piece">
+            <td class="#piece" data-piece_id="<%= piece %>" data-piece_name="piece">
               <%= piece.position_x %>, <%= piece.position_y %>
             </td>
           <% else %>
