@@ -90,3 +90,4 @@ class Piece < ApplicationRecord
   end
   
 end # end of class
+
