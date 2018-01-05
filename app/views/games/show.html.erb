@@ -10,8 +10,9 @@
         <% 8.times.each do |col| %>
           <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
           <% if piece.present? %>
-            <td class="#pawn_spot" data-piece_id="<%= piece %>" data-piece_name="pawn">
-              <%= piece.position_x %>, <%= piece.position_y %>
+            <td class="<%= piece.color %>_<%= piece.type %>" data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
+              <% image = "#{piece.color}_#{piece.type}.png" %>
+              <%= image_tag image %>
             </td>
           <% else %>
             <td></td>
