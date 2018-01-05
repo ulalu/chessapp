@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   has_many :pieces
 
   validates :name, presence: true
-  after_create :populate_board, :piece_at_location
+  after_create :populate_board
 	
 	def populate_board
   	# Populates white pieces in the database
@@ -16,11 +16,11 @@ class Game < ApplicationRecord
 	  Rook.create(game_id: id, type: 'Rook', color:'white', position_x: 7, position_y: 0)
 
 	  Knight.create(game_id: id, type: 'Knight', color: 'white', position_x: 1, position_y: 0)
-	  Knight.create(game_id: id, type: 'Knight', color: 'white', position_x: 5, position_y: 0)
+	  Knight.create(game_id: id, type: 'Knight', color: 'white', position_x: 6, position_y: 0)
 
 
 	  Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 2, position_y: 0)
-	  Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 6, position_y: 0)
+	  Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 5, position_y: 0)
 
 	  Queen.create(game_id: id, type: 'Queen', color: 'white', position_x: 3, position_y: 0)
 	  King.create(game_id: id, type: 'King', color: 'white', position_x: 4, position_y: 0)
@@ -44,11 +44,6 @@ class Game < ApplicationRecord
 	  Queen.create(game_id: id, type: 'Queen', color: 'black', position_x: 3, position_y: 7)
 	  King.create(game_id: id, type: 'King', color: 'black', position_x: 4, position_y: 7)
 	  end
-
-  def piece_at_location(position_x, position_y)
-		piece = Piece.where(position_x: x_position, position_y: y_position, game_id: self.id).first
-	end
-
 
 end
 
