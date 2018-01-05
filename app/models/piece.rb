@@ -2,6 +2,18 @@ class Piece < ApplicationRecord
 
   belongs_to :game
   
+  def black?
+    color.eql?('black')
+  end
+  
+  def white?
+    color.eql?('white')
+  end
+  
+  def off_the_board(x, y)
+    (x < 0 || y < 0 || x > 7 || y > 7 )
+  end
+  
   def examine_path(position_x, position_y, end_x, end_y)
     if position_y == end_y
       'horizontal'
@@ -10,10 +22,6 @@ class Piece < ApplicationRecord
     elsif (end_y - position_y).abs == (end_x - position_x).abs
       'diagonal'
     end
-  end
-
-  def off_the_board(x, y)
-    return 'invalid' if (x < 0 || y < 0 || x > 7 || y > 7 )
   end
 
   # Checks btw piece and desired position for obstruction on horizontal.
