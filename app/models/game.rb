@@ -15,11 +15,11 @@ class Game < ApplicationRecord
   Rook.create(game_id: id, type: 'Rook', color:'white', position_x: 7, position_y: 0)
 
   Knight.create(game_id: id, type: 'Knight', color: 'white', position_x: 1, position_y: 0)
-  Knight.create(game_id: id, type: 'Knight', color: 'white', position_x: 6, position_y: 0)
+  Knight.create(game_id: id, type: 'Knight', color: 'white', position_x: 5, position_y: 0)
 
 
   Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 2, position_y: 0)
-  Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 5, position_y: 0)
+  Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 6, position_y: 0)
 
   Queen.create(game_id: id, type: 'Queen', color: 'white', position_x: 3, position_y: 0)
   King.create(game_id: id, type: 'King', color: 'white', position_x: 4, position_y: 0)
