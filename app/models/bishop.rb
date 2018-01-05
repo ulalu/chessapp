@@ -7,4 +7,6 @@ class Bishop < Piece
 		else
 				return false
 		end
+  end
+
 end
