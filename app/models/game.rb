@@ -4,6 +4,7 @@ class Game < ApplicationRecord
   has_many :pieces
 
   validates :name, presence: true
+  after_create :populate_board
 	
 	after_create :populate_board
 	
@@ -12,6 +13,7 @@ class Game < ApplicationRecord
   	# Populates white pieces in the database
     (0..7).each do |p|
       Pawn.create(game_id: id, type: 'Pawn', color: 'white', position_x: p, position_y: 1)
+
     end
     
     Rook.create(game_id: id, type: 'Rook', color:'white', position_x: 0, position_y: 0)

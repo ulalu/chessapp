@@ -1,12 +1,10 @@
 <h3>Game Show Page</h3>
 <%= link_to 'Home', root_path, class: 'btn btn-primary' %>
 
-
 <div class="board-container">
-    <table id="board">
-
+    <table id="board" style="width: 100%, height: auto">
     <% 8.times.each do |row| %>
-      <tr>
+      <tr id="row">
         <% 8.times.each do |col| %>
           <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
           <% if piece.present? %>
