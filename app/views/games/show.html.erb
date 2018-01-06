@@ -4,7 +4,7 @@
 <div class="board-container">
     <table id="board" style="width: 100%, height: auto">
     <% 8.times.each do |row| %>
-      <tr id="row_<%= row %>">
+      <tr id="row">
         <% 8.times.each do |col| %>
           <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
           <% if piece.present? %>
