@@ -1,59 +1,120 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
-  describe 'obstructed? method' do
-    it "should return true if horizontal right is obstructed" do
-      user = FactoryBot.create(:user)
-      game = FactoryBot.create(:game, user: user)
-      piece = FactoryBot.create(:piece, position_x: 0, position_y: 0, game: game)
-      obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 0, game: game)
+  
+  let(:user) { FactoryBot.create(:user) }
+  let(:game) { FactoryBot.create(:game, user: user) }
+  
+  describe '#obstructed?' do
+    describe '#horizontal_obstruct' do
+    
+      before do
+        game.pieces.map do |piece|
+          piece.destroy!
+        end
+      end
       
-      expect(piece.obstructed?(5, 0)).to eq(true)
+      describe 'horizontal right' do
+        let(:piece) { FactoryBot.create(:piece, position_x: 0, position_y: 0, game: game) } 
+        
+        it 'returns true if horizontal right is obstructed' do
+          obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 0, game: game)
+          
+          expect(piece.horizontal_obstruct?(5)).to eq true
+        end
+        
+        it 'returns false if horizontal right isnt obstructed' do
+          expect(piece.horizontal_obstruct?(5)).to eq false
+        end
+      end
+      
+      describe 'horizontal left'do
+        let(:piece) { FactoryBot.create(:piece, position_x: 5, position_y: 0, game: game) }
+        
+        it 'returns true is horizontal left is obstructed' do
+          obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 0, game: game)
+          
+          expect(piece.horizontal_obstruct?(0)).to eq true
+        end
+        
+        it 'returns false if horizontal left isnt obstructed' do
+          expect(piece.horizontal_obstruct?(0)).to eq false
+        end
+      end
     end
     
-    it "should return true if horizontal left is obstructed" do
-      user = FactoryBot.create(:user)
-      game = FactoryBot.create(:game, user: user)
-      piece = FactoryBot.create(:piece, position_x: 5, position_y: 0, game: game)
-      obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 0, game: game)
+    describe '#diagonal_obstruct?' do
       
-      expect(piece.obstructed?(0, 0)).to eq(true)
-    end
+      before do 
+        game.pieces.map do |piece|
+          piece.destroy!
+        end
+      end
     
-    it "should return true if vertical up is obstructed" do
-      user = FactoryBot.create(:user)
-      game = FactoryBot.create(:game, user: user)
-      piece = FactoryBot.create(:piece, position_x: 0, position_y: 5, game: game)
-      obstruction = FactoryBot.create(:piece, position_x: 0, position_y: 2, game: game)
+      describe 'diagonal down' do
+        let(:piece) { FactoryBot.create(:piece, position_x: 0, position_y: 0, game: game) }
+        
+        it 'returns true if diaganal down is  obstructed' do
+          obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 2, game: game)
+          
+          expect(piece.diagonal_obstruct?(4, 4)).to eq true
+        end
+        
+        it 'returns false if diaganal down isnt obstructed' do
+          expect(piece.diagonal_obstruct?(4, 4)).to eq false
+        end
+      end
       
-      expect(piece.obstructed?(0, 1)).to eq(true)
-    end
+      describe 'diagonal up' do
+        let(:piece) { FactoryBot.create(:piece, position_x: 4, position_y: 4, game: game) }
+        
+        it 'returns true if diagonal up is obstructed' do
+          obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 2, game: game)
+        
+          expect(piece.diagonal_obstruct?(0, 0)).to eq true
+        end
+        
+        it 'returns false if diagonal up isnt obstructed' do
+          expect(piece.diagonal_obstruct?(0, 0)).to eq false
+        end
+      end
+    end 
     
-    it "should return true if vertical down is obstructed" do
-      user = FactoryBot.create(:user)
-      game = FactoryBot.create(:game, user: user)
-      piece = FactoryBot.create(:piece, position_x: 0, position_y: 0, game: game)
-      obstruction = FactoryBot.create(:piece, position_x: 0, position_y: 2, game: game)
+    describe '#vertical_obstruct?' do
+  
+      before do
+        game.pieces.map do |piece|
+          piece.destroy!
+        end
+      end
       
-      expect(piece.obstructed?(0, 5)).to eq(true)
-    end
-    
-    it "should return true if diagonal down is obstructed" do
-      user = FactoryBot.create(:user)
-      game = FactoryBot.create(:game, user: user)
-      piece = FactoryBot.create(:piece, position_x: 0, position_y: 0, game: game)
-      obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 2, game: game)
+      describe 'vertical down' do
+        let(:piece) { FactoryBot.create(:piece, position_x: 0, position_y: 1, game: game) }
+        
+        it 'returns true when occupied' do
+          obstruction = FactoryBot.create(:piece, position_x: 0, position_y: 3, game: game)
+        
+          expect(piece.vertical_obstruct?(5)).to eq(true)
+        end
+  
+        it 'returns false when not occupied' do
+          expect(piece.vertical_obstruct?(5)).to eq false
+        end
+      end
       
-      expect(piece.obstructed?(4, 4)).to eq(true)
-    end
-    
-    it "should return true if diaganal up is obstructed" do
-      user = FactoryBot.create(:user)
-      game = FactoryBot.create(:game, user: user)
-      piece = FactoryBot.create(:piece, position_x: 4, position_y: 4, game: game)
-      obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 2, game: game)
-      
-      expect(piece.obstructed?(0, 0)).to eq(true)
+      describe 'vertical up' do
+        let(:piece) { FactoryBot.create(:piece, position_x: 0, position_y: 7, game: game) }
+        
+        it 'returns true when occupied' do
+          obstruction = FactoryBot.create(:piece, position_x: 0, position_y: 5, game: game)
+        
+          expect(piece.vertical_obstruct?(3)).to eq(true)
+        end
+        
+         it 'returns false when not occupied' do
+           expect(piece.vertical_obstruct?(0)).to eq false
+         end
+      end
     end
   end
 end

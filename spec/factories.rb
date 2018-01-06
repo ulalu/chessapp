@@ -22,7 +22,13 @@ FactoryBot.define do
   end
   
   factory :king do
-
+    
+  end
+  
+  factory :pawn do
+    position_x 0
+    position_y 1
+    color 'white'
   end
   
 end
