@@ -8,7 +8,8 @@ class Pawn < Piece
   end
     
   def forward_move?(end_y, y_diff)
-    ((y_diff).eql?(2) && first_move? || (y_diff).eql?(1))end
+    ((y_diff).eql?(2) && first_move? || (y_diff).eql?(1))
+  end
   
   def first_move?
     ((position_y).eql?(1) && white? || (position_y).eql?(6) && black?)
