@@ -9,3 +9,4 @@ class Bishop < Piece
 		end
 	end
 end
+

@@ -30,5 +30,17 @@ FactoryBot.define do
     position_y 1
     color 'white'
   end
+
+  factory :bishop do
+
+  end
+
+  factory :rook do
+
+  end
+
+  factory :queen do
+
+  end
   
 end
