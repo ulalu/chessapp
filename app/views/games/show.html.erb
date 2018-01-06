@@ -10,7 +10,7 @@
           <% if piece.present? %>
             <td class="<%= piece.color %>_<%= piece.type %>" data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
               <% image = "#{piece.color}_#{piece.type}.png" %>
-              <%= image_tag image %>
+              <%= image_tag image, class: 'draggable', id: "-data-piece-id=#{piece.id}" %>
             </td>
           <% else %>
             <td></td>
