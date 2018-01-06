@@ -6,7 +6,7 @@ class Game < ApplicationRecord
   validates :name, presence: true
   after_create :populate_board
 	
-	after_create :populate_board
+
 	
 	
 	def populate_board
