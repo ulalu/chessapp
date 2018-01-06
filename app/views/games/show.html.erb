@@ -4,13 +4,13 @@
 <div class="board-container">
     <table id="board" style="width: 100%, height: auto">
     <% 8.times.each do |row| %>
-      <tr id="row">
+      <tr id="row_<%= row %>">
         <% 8.times.each do |col| %>
           <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
           <% if piece.present? %>
-            <td class="<%= piece.color %>_<%= piece.type %>" data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
+            <td id="row_<%=row%>_col_<%=col%>" class="<%= piece.color %>_<%= piece.type %>" data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
               <% image = "#{piece.color}_#{piece.type}.png" %>
-              <%= image_tag image, class: 'draggable', id: "-data-piece-id=#{piece.id}" %>
+              <%= image_tag image, class: 'draggable', id: "data-piece-id=#{piece.id}" %>
             </td>
           <% else %>
             <td></td>
