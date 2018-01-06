@@ -9,7 +9,6 @@ RSpec.describe King, type: :model do
                 king = FactoryBot.create(:king, position_x: 5, position_y: 0, game: game)
                 
                 expect(king.legal(4, 1)).to eq(true)
-
             end
         end
         

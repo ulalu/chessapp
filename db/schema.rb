@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180106044903) do
     t.integer  "white_id"
     t.integer  "black_id"
     t.integer  "winner_id"
+
     t.index ["user_id"], name: "index_games_on_user_id", using: :btree
   end
 
