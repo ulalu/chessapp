@@ -1,0 +1,5 @@
+<h2>Available games</h2>
+
+<% @games.each do |game| %>
+    <%= link_to game.name, game_path(game) %>
+<% end %>
