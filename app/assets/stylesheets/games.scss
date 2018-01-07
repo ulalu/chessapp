@@ -8,6 +8,7 @@
 
 #board {
     background-color: black;
+    color: red;
 }
 
 #board td {
@@ -25,4 +26,8 @@
     height: 100px;
     width: 100px;
     border-collapse: collapse;
+}
+
+#board td.white_Rook {
+    content: "&#9814";
 }
