@@ -63,6 +63,6 @@ end
 gem 'devise'
 gem 'bootstrap', '4.0.0.alpha6'
 gem 'rails-ujs'
-
+gem "awesome_print", require:"ap"
 gem 'simple_form'
 

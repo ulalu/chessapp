@@ -1,6 +1,7 @@
 class Pawn < Piece
 
   def valid_move?(end_x, end_y)
+    return false if obstructed?(end_x, end_y)
     y_diff = end_y - position_y if white?
     y_diff = position_y - end_y if black?
     
