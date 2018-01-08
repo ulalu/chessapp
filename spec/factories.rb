@@ -25,6 +25,10 @@ FactoryBot.define do
     
   end
   
+  factory :knight do
+    color 'black'
+  end
+  
   factory :pawn do
     position_x 0
     position_y 1
