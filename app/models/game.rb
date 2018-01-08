@@ -26,8 +26,8 @@ class Game < ApplicationRecord
     Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 2, position_y: 0)
     Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 5, position_y: 0)
   
-    Queen.create(game_id: id, type: 'Queen', color: 'white', position_x: 3, position_y: 0)
-    King.create(game_id: id, type: 'King', color: 'white', position_x: 4, position_y: 0)
+    Queen.create(game_id: id, type: 'Queen', color: 'white', position_x: 4, position_y: 0)
+    King.create(game_id: id, type: 'King', color: 'white', position_x: 3, position_y: 0)
   
   
     # Populates black pieces in the database
@@ -45,8 +45,8 @@ class Game < ApplicationRecord
     Bishop.create(game_id: id, type: 'Bishop', color: 'black', position_x: 2, position_y: 7)
     Bishop.create(game_id: id, type: 'Bishop', color: 'black', position_x: 5, position_y: 7)
       
-    Queen.create(game_id: id, type: 'Queen', color: 'black', position_x: 3, position_y: 7)
-    King.create(game_id: id, type: 'King', color: 'black', position_x: 4, position_y: 7)
+    Queen.create(game_id: id, type: 'Queen', color: 'black', position_x: 4, position_y: 7)
+    King.create(game_id: id, type: 'King', color: 'black', position_x: 3, position_y: 7)
   end
 end
 
