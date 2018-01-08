@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Pawn, type: :model do
   
-  describe 'valid_move? method' do
+  describe '#valid_move?' do
     let(:user) { FactoryBot.create(:user) }
     let(:game) { FactoryBot.create(:game, user: user) }
     let(:pawn) { FactoryBot.create(:pawn, position_x: 0, position_y: 1,  game: game) }
