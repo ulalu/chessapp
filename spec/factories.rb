@@ -26,7 +26,7 @@ FactoryBot.define do
   end
   
   factory :knight do
-    color 'white'
+    color 'black'
   end
   
   factory :pawn do

@@ -11,6 +11,11 @@ RSpec.describe Pawn, type: :model do
       expect(pawn.valid_move?(0, 3)).to eq true
     end
     
+    it "returns false if obstructed" do
+      obstruction = FactoryBot.create(:piece, position_x: 0, position_y: 2, game: game)
+      expect(pawn.valid_move?(0, 3)).to eq false
+    end
+    
     it 'returns false if not a valid move' do
       expect(pawn.valid_move?(0, 4)).to eq false
     end
