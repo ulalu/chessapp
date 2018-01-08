@@ -25,6 +25,9 @@ FactoryBot.define do
     
   end
   
+  factory :knight do
+  end
+  
   factory :pawn do
     position_x 0
     position_y 1
