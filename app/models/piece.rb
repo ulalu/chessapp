@@ -2,8 +2,8 @@ class Piece < ApplicationRecord
 
   belongs_to :game
   
-  # Determine if space has a present and isnt nil
-  def present?(x, y)
+  # Determine if space has a piece present and isnt nil
+  def obstruction_present?(x, y)
     game.pieces.find_by(position_x: x, position_y: y).nil?
   end
   
