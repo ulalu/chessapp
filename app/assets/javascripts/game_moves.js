@@ -5,6 +5,18 @@ function getAlltableDataElements() {
 	return tdArray;
 }
 
+// Find square info and return that item to move chess piece to it
+function targetForMove(positionTop, positionLeft, dataStructureArray) {
+	squareHights = dataStructureArray[0];
+	squareWidths = dataStructureArray[1];
+
+	function findSquare() {
+		
+	}
+
+	console.log(dataStructureArray.find(findSquare))
+}
+
 // Data structure stores div id selector, position.top and left plus row number and column number.
 // This is used to create an array with a whole bunch of data structures in it.
 function tdDataStruct(name, top, left, row, col) {
