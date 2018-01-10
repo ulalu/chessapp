@@ -1,10 +1,28 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Francois+One');
 @import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
+h1 {
+	color: black;
+	font-size: 72px;
+	font-family: 'Francois One', sans-serif;
+	padding-top: 10px;
+}
+
+h2 {
+  color: black;
+	font-family: 'Francois One', sans-serif;
+	font-size: 32px;
+
+}
+
+h3 {
+  color: black;
+  font-family: 'Francois One', sans-serif;
+}
 
 .navbar {
   background: #62757f;
-  
+  position: relative;
 }
 
 .main-nav {
@@ -30,37 +48,29 @@ a.navbar-brand.logo {
 }
 
 .hero {
-  background: image_url('hero.png') no-repeat;
-  background-size: 100%;
-  height: 400px;
-  width: 100%;
-  max-width: 100%;
+  content: url('hero.png');
+  width: 100vw;
+  position: relative;
+  z-index: -1;
 }
 
-.frosted h1, h2 {
+.frosted {
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  padding: 15px 30px 15px 30px;
+  width: 45vw;
   text-align: right;
 }
 
-
-h1 {
-	color: white;
-	font-size: 72px;
-	font-family: 'Francois One', sans-serif;
-	text-align: center;
-	padding-top: 10px;
+.frosted h1{
+  color: rgb(193,213,224);
 }
 
-h2 {
-  color: white;
-	font-family: 'Francois One', sans-serif;
-	font-size: 32px;
-	text-align: center;
+.frosted h2 {
+  color: rgb(98,117,127);
 }
 
-h3 {
-  color: black;
-  font-family: 'Francois One', sans-serif;
-}
 
 body {
   font-family: 'Didact Gothic', sans-serif;
@@ -68,7 +78,7 @@ body {
 }
 
 .booyah-box {
-  background: #c1d5e0;
+  background: rgba(193,213,224,.95);
   color: white;
   padding: 40px;
 }
@@ -97,8 +107,6 @@ body {
 
 .available-games {
   font-size: 48px;
-  margin-top: 50px;
-  margin-bottom: 20px;
 }
 
 .board-container {
@@ -108,7 +116,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   background-color: black;
-  box-shadow: 5px 5px;
 }
 
 #board td {
@@ -134,14 +141,7 @@ body {
 }
 
 
-h1, h2, h3, h4, h5, h6, .navbar, .container .hero {
+.navbar, .container, .hero {
   margin: 0;
-  padding: 0;
 }
 
-.frosted {
-  position: absolute;
-  top: 200px;
-  right: 10px;
-  padding: 15px 30px 15px 30px;
-}
