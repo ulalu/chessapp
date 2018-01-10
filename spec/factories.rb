@@ -14,12 +14,37 @@ FactoryBot.define do
   
   factory :piece do
     type 'Rook'
-    board_id 1
     special 'none'
     color 'white'
     position_x 0
     position_y 0
     association :game
+  end
+  
+  factory :king do
+    
+  end
+  
+  factory :knight do
+    color 'black'
+  end
+  
+  factory :pawn do
+    position_x 0
+    position_y 1
+    color 'white'
+  end
+
+  factory :bishop do
+
+  end
+
+  factory :rook do
+
+  end
+
+  factory :queen do
+
   end
   
 end

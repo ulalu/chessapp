@@ -1,54 +1,52 @@
 class Game < ApplicationRecord
 
-belongs_to :user
-has_many :pieces
+  belongs_to :user
+  has_many :pieces
 
-	validates :name, presence: true
+  validates :name, presence: true
+  after_create :populate_board
 	
-#I'm not going to try to initialize this just yet in the rails side of things. First I want to get a good idea of how I can style an array on a page!
 
-	def board_setup
-		# white
-		(0..7).each do |p|
-			Pawn.create(
+	
+	
+	def populate_board
+  	# Populates white pieces in the database
+    (0..7).each do |p|
+      Pawn.create(game_id: id, type: 'Pawn', color: 'white', position_x: p, position_y: 1)
 
-				x_position: p,
-				y_position: 1,
-			) 
-
-		Rook.create( x_position: 0, y_position: 0)
-		Rook.create( x_position: 7, y_position: 0)
-
-		Knight.create( x_position: 1, y_position: 0)
-		Knight.create( X_position: 6, y_position: 0)
-
-		Bishop.create( x_position: 2, y_position: 0)
-		Bishop.create( x_position: 2, y_position: 0)
-
-		Queen.create( x_position: 3, y_position: 0)
-		King.create( x_position: 4, y_position: 0)
-
-		#Black
-		(0..7).each do |p|
-			Pawn.create(
-				x_position: p,
-				y_position: 6,
-
-				)
-
-		Rook.create( x_position: 0, y_position: 7)
-		Rook.create( x_position: 7, y_position: 7)
-
-		Knight.create( x_position: 1, y_position: 7)
-		Knight.create( x_position: 6, y_position: 7)	
-
-		Bishop.create( x_position: 2, y_position: 7)
-		Bishop.create( x_position: 5, y_position: 7)
-
-		Queen.create( x_position: 3, y_position: 7)
-		King.create( x_position: 4, y_position: 7)
-	end
-end
-end
+    end
+    
+    Rook.create(game_id: id, type: 'Rook', color:'white', position_x: 0, position_y: 0)
+    Rook.create(game_id: id, type: 'Rook', color:'white', position_x: 7, position_y: 0)
+  
+    Knight.create(game_id: id, type: 'Knight', color: 'white', position_x: 1, position_y: 0)
+    Knight.create(game_id: id, type: 'Knight', color: 'white', position_x: 6, position_y: 0)
+  
+  
+    Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 2, position_y: 0)
+    Bishop.create(game_id: id, type: 'Bishop', color: 'white', position_x: 5, position_y: 0)
+  
+    Queen.create(game_id: id, type: 'Queen', color: 'white', position_x: 4, position_y: 0)
+    King.create(game_id: id, type: 'King', color: 'white', position_x: 3, position_y: 0)
+  
+  
+    # Populates black pieces in the database
+    (0..7).each do |p|
+      Pawn.create(game_id: id, type: 'Pawn', color: 'black', position_x: p, position_y: 6)
+    end
+  
+    Rook.create(game_id: id, type: 'Rook', color:'black', position_x: 0, position_y: 7)
+    Rook.create(game_id: id, type: 'Rook', color:'black', position_x: 7, position_y: 7)
+  
+    Knight.create(game_id: id, type: 'Knight', color: 'black', position_x: 1, position_y: 7)
+    Knight.create(game_id: id, type: 'Knight', color: 'black', position_x: 6, position_y: 7)
+  
+  
+    Bishop.create(game_id: id, type: 'Bishop', color: 'black', position_x: 2, position_y: 7)
+    Bishop.create(game_id: id, type: 'Bishop', color: 'black', position_x: 5, position_y: 7)
+      
+    Queen.create(game_id: id, type: 'Queen', color: 'black', position_x: 4, position_y: 7)
+    King.create(game_id: id, type: 'King', color: 'black', position_x: 3, position_y: 7)
+  end
 end
 
