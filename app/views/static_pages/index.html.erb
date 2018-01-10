@@ -1,14 +1,17 @@
-<h1>Let's Play Chess</h1>
-<h2>Do you have what it takes to be a grandmaster?</h2>
+<div class = "hero">
+  <div class= "frosted">
+    <h1>Let's Play Chess</h1>
+    <div>
+      <h2>Do you have what it takes to be a grandmaster?</h2>
+    </div>
+  </div>
+</div>
+
 <br />
 <br />
 
 <div class="booyah-box col-10 offset-1">
-  <div class="row col-10 offset-1">
-     <div class="start-button">
-	     <%= link_to 'Start Game', new_game_path, class: 'btn btn-primary button big' %>
-      </div>
-  </div>
+  
 <!-- 	<br />
 	<br /> -->
 <!-- 	<%= link_to 'Career Stats', '#', class: 'btn btn-primary button big' %> -->
@@ -17,6 +20,14 @@
 <!-- 	<%= link_to 'About Us', '#', class: 'btn btn-primary button big' %> -->
 
 <h2 class="available-games">Available Games</h2>
+
+  <div class="row col-10 offset-1">
+     <div class="start-button">
+	     <%= link_to 'Start Game', new_game_path, class: 'btn btn-primary button big' %>
+      </div>
+  </div>
+  
+<br>
 
 <div class="row col-10 offset-1">
   <div class="games-list">

@@ -1,45 +1,147 @@
 @import "bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Exo');
+@import url('https://fonts.googleapis.com/css?family=Francois+One');
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
+
+.navbar {
+  background: #62757f;
+  
+}
+
+.main-nav {
+  display: inline-block;
+  float: right;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+.logo {
+  font-family: 'Francois One', sans-serif;
+  text-transform: uppercase;
+}
+
+.main-nav-link {
+  padding-right: 30px;
+}
+
+.nav-item a{
+  color: white;
+}
+
+a.navbar-brand.logo {
+  color: white;
+}
+
+.hero {
+  background: image_url('hero.png') no-repeat;
+  background-size: 100%;
+  height: 400px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.frosted h1, h2 {
+  text-align: right;
+}
+
 
 h1 {
 	color: white;
 	font-size: 72px;
-	font-family: 'Exo', sans-serif;
+	font-family: 'Francois One', sans-serif;
 	text-align: center;
 	padding-top: 10px;
 }
 
 h2 {
   color: white;
-	font-family: 'Exo', sans-serif;
+	font-family: 'Francois One', sans-serif;
 	font-size: 32px;
 	text-align: center;
 }
 
+h3 {
+  color: black;
+  font-family: 'Francois One', sans-serif;
+}
+
 body {
-  background: url(bg.png);
+  font-family: 'Didact Gothic', sans-serif;
+  background: #90a4ae;
 }
 
 .booyah-box {
+  background: #c1d5e0;
   color: white;
+  padding: 40px;
 }
+
 .booyah-box a {
   margin-left: 10px;
 }
+
 .row {
   margin: 0 auto;
 }
+
 .start-button {
   margin: 0 auto;
 }
+
 .games-list {
   margin: 0 auto;
 }
+
 .games-list p {
   text-align: center;
+  color: black;
+  text-transform: uppercase;
 }
+
 .available-games {
   font-size: 48px;
   margin-top: 50px;
   margin-bottom: 20px;
+}
+
+.board-container {
+}
+
+#board {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
+  box-shadow: 5px 5px;
+}
+
+#board td {
+    background-image: url("white.png");
+    background-position: left;
+    border-collapse: collapse;
+    width: 11vh;
+    padding-bottom: 12.5%;
+}
+
+#board tr:nth-child(odd) td:nth-child(even),
+#board tr:nth-child(even) td:nth-child(odd) {
+    background-image: url("black.png");
+    background-position: left;
+    border-collapse: collapse;
+
+}
+
+.center {
+  text-align: center;
+  margin: auto;
+  padding-bottom: 40px;
+}
+
+
+h1, h2, h3, h4, h5, h6, .navbar, .container .hero {
+  margin: 0;
+  padding: 0;
+}
+
+.frosted {
+  position: absolute;
+  top: 200px;
+  right: 10px;
+  padding: 15px 30px 15px 30px;
 }

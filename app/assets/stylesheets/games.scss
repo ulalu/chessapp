@@ -2,32 +2,3 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.board-container {
-    
-}
-
-#board {
-    background-color: black;
-    color: red;
-}
-
-#board td {
-    background-image: url("white.png");
-    background-position: left;
-    height: 100px;
-    width: 100px;
-    border-collapse: collapse;
-}
-
-#board tr:nth-child(odd) td:nth-child(even),
-#board tr:nth-child(even) td:nth-child(odd) {
-    background-image: url("black.png");
-    background-position: left;
-    height: 100px;
-    width: 100px;
-    border-collapse: collapse;
-}
-
-#board td.white_Rook {
-    content: "&#9814";
-}
