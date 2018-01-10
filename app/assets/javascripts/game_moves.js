@@ -1,70 +1,80 @@
+
 // Retreive all TD elements and return as an array
 function getAlltableDataElements() {
 	tdArray = $("td");
 	return tdArray;
 }
-function tdDataStruct(name, top, left) {
+
+// Data structure stores div id selector, position.top and left plus row number and column number.
+// This is used to create an array with a whole bunch of data structures in it.
+function tdDataStruct(name, top, left, row, col) {
 	this.name = name;
 	this.top = top;
 	this.left = left;
-}
+	this.row = row;
+	this.col = col;
+ }
 // Build a TD element array by search each items in tdElements. This is to store positions of these items
 function tdLocations(tdEleArray) {
 	positionArray = [];
 	heightWidthSelector = 'td#row_0_col_0';
 	// Store height and width of bpx
-	console.log($('td#row_0_col_0').height());
+	console.info($('td#row_0_col_0').height());
 	positionArray.push($(heightWidthSelector).height());
 	positionArray.push($(heightWidthSelector).width());
 
-	for(i = 0; i < tdEleArray.length; i++) {
-		console.log($(tdEleArray[i]).position().top);
-		t = $(tdEleArray[i]).position().top;
-		left = $(tdEleArray[i]).position().left;
-		name = $(tdEleArray[i]).attr('id');
+	// Take elements fed from array of td's and create datastructure with information in it
+	tdEleArray.each(function () {
+		topPosition = $(this).position().top;
+		leftPosition = $(this).position().left;
+		rowNumber = parseInt($(this).attr('id').split("_")[1]);
+		colNumber = parseInt($(this).attr('id').split("_")[3]);
+		nameOfTD = $(this).attr('id');
+		console.info("Top: " + topPosition + " Left: " + leftPosition + " Name: " + nameOfTD );
+		dataStructure = new tdDataStruct(name, topPosition, leftPosition, rowNumber, colNumber);
 
-		console.log("Top: " + t + " Left: " + left + " Name: " + name );
-		datastruct = new tdDataStruct(name, t, left);
-		positionArray.push(datastruct);
+		// Push each new dataStructure into array.
+		positionArray.push(dataStructure);
+	});
 
-
-	}
 
 	console.log(positionArray);
 	return positionArray;
 
 }
-
+if($('.draggable')) {
 // All TD elements store here
-var tdElements = null;
-$(function () {
-	tdElements = getAlltableDataElements();
-	console.log(tdElements);
+	var tdElements = null;
+	$(function () {
+		tdElements = getAlltableDataElements();
+		console.log(tdElements);
+		$('.draggable').draggable();
 
-	var blah = tdLocations(tdElements);
 
-	$('.draggable').draggable();
+		var blah = tdLocations(tdElements);
 
-	// Variables to keep track of source row and col from piece selected
-	var fromRow = -1;
-	var fromCol = -1;
 
-	// $('.draggable').click(function () {
-	// 	td = $(this).parent().get(0);
-	// 	sourceMove = td.id;
-	// 	console.log(sourceMove);
-	//
-	// })
-	$('.draggable').on('mousedown', function (data) {
-		td = $(this).parent().get(0);
-		sourceMove = td.id;
+		// Variables to keep track of source row and col from piece selected
+		var fromRow = -1;
+		var fromCol = -1;
 
-		fromRow = sourceMove.split("_")[1];
-		fromCol = sourceMove.split("_")[3];
+		// $('.draggable').click(function () {
+		// 	td = $(this).parent().get(0);
+		// 	sourceMove = td.id;
+		// 	console.log(sourceMove);
+		//
+		// })
+		$('.draggable').on('mousedown', function (data) {
+			td = $(this).parent().get(0);
+			sourceMove = td.id;
 
+			fromRow = sourceMove.split("_")[1];
+			fromCol = sourceMove.split("_")[3];
+
+		});
+		$('.draggable').on('mouseup', function (data) {
+			//console.log(data);
+			console.log("Moved piece from row: " + fromRow + " col: " + fromCol);
+		})
 	});
-	$('.draggable').on('mouseup', function (data) {
-		//console.log(data);
-		console.log("Moved piece from row: " + fromRow + " col: " + fromCol);
-	})
-});
+}
