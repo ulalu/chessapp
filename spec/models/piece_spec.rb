@@ -28,10 +28,10 @@ RSpec.describe Piece, type: :model do
         end
       end
       
-      describe 'horizontal left'do
+      describe 'horizontal left' do
         let(:piece) { FactoryBot.create(:piece, position_x: 5, position_y: 0, game: game) }
         
-        it 'returns true is horizontal left is obstructed' do
+        it 'returns true if horizontal left is obstructed' do
           obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 0, game: game)
           
           expect(piece.horizontal_obstruct?(0)).to eq true
@@ -54,7 +54,7 @@ RSpec.describe Piece, type: :model do
       describe 'diagonal down' do
         let(:piece) { FactoryBot.create(:piece, position_x: 0, position_y: 0, game: game) }
         
-        it 'returns true if diagonal down is  obstructed' do
+        it 'returns true if diagonal down is obstructed' do
           obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 2, game: game)
           
           expect(piece.diagonal_obstruct?(4, 4)).to eq true
@@ -91,13 +91,13 @@ RSpec.describe Piece, type: :model do
       describe 'vertical down' do
         let(:piece) { FactoryBot.create(:piece, position_x: 0, position_y: 1, game: game) }
         
-        it 'returns true when occupied' do
+        it 'returns true if obstructed' do
           obstruction = FactoryBot.create(:piece, position_x: 0, position_y: 3, game: game)
         
           expect(piece.vertical_obstruct?(5)).to eq true
         end
   
-        it 'returns false when not occupied' do
+        it 'returns false if not obstructed' do
           expect(piece.vertical_obstruct?(5)).to eq false
         end
       end

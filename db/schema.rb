@@ -23,7 +23,10 @@ ActiveRecord::Schema.define(version: 20180106044903) do
     t.integer  "white_id"
     t.integer  "black_id"
     t.integer  "winner_id"
+<<<<<<< HEAD
     t.index ["user_id"], name: "index_games_on_user_id", using: :btree
+=======
+>>>>>>> f96c044eb454d73024f10d0a6f3668b081ae9c91
   end
 
   create_table "pieces", id: :bigserial, force: :cascade do |t|
