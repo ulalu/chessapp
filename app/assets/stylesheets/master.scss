@@ -1,45 +1,174 @@
 @import "bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Exo');
+@import url('https://fonts.googleapis.com/css?family=Francois+One');
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
+
+//primary colors are blue-grey-dark: #62757f blue-grey-medium: #90a4ae blue-grey-light: #c1d5e0
+//secondary colors are teal-dark: #61babb teal-medium: #94eded teal-light: #c8ffff
+//use francois one for headers and accent text
+//use didact gothic for body text
+//
+
 
 h1 {
-	color: white;
+	color: black;
 	font-size: 72px;
-	font-family: 'Exo', sans-serif;
-	text-align: center;
+	font-family: 'Francois One', sans-serif;
 	padding-top: 10px;
 }
 
 h2 {
-  color: white;
-	font-family: 'Exo', sans-serif;
+  color: black;
+	font-family: 'Francois One', sans-serif;
 	font-size: 32px;
-	text-align: center;
+
 }
 
+h3 {
+  color: black;
+  font-family: 'Francois One', sans-serif;
+}
+
+.navbar {
+  background: #62757f;
+  position: relative;
+}
+
+.main-nav {
+  display: inline-block;
+  float: right;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+.logo {
+  font-family: 'Francois One', sans-serif;
+  text-transform: uppercase;
+}
+
+.main-nav-link {
+  padding-right: 30px;
+}
+
+.nav-item a{
+  color: white;
+}
+
+a.navbar-brand.logo {
+  color: white;
+}
+
+.hero {
+  content: url('hero.png');
+  width: 100vw;
+  position: relative;
+  z-index: -1;
+}
+
+.frosted {
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  padding: 15px 30px 15px 30px;
+  width: 48vw;
+  text-align: right;
+}
+
+.frosted h1{
+  color: rgb(193,213,224);
+}
+
+.frosted h2 {
+  color: rgb(98,117,127);
+}
+
+
 body {
-  background: url(bg.png);
+  font-family: 'Didact Gothic', sans-serif;
+  background-image: url("lbbg.png");
+  //background-color: #c1d5e0;
 }
 
 .booyah-box {
+  background-color: #f5f5f6;
   color: white;
+  padding: 40px;
 }
+
 .booyah-box a {
   margin-left: 10px;
 }
+
 .row {
   margin: 0 auto;
 }
+
 .start-button {
   margin: 0 auto;
 }
+
 .games-list {
   margin: 0 auto;
 }
+
 .games-list p {
   text-align: center;
+  color: black;
+  text-transform: uppercase;
 }
+
 .available-games {
   font-size: 48px;
-  margin-top: 50px;
-  margin-bottom: 20px;
 }
+
+.board-container {
+}
+
+#board {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #62757f;
+  outline: 5px double #90a4ae;
+  webkit-box-shadow: 10px 10px 17px 1px rgba(98,117,127,0.36);
+  -moz-box-shadow: 10px 10px 17px 1px rgba(98,117,127,0.36);
+  box-shadow: 10px 10px 17px 1px rgba(98,117,127,0.36);
+}
+
+#board td {
+    background-image: url("white.png");
+    background-position: left;
+    border-collapse: collapse;
+    width: 11vh;
+    padding-bottom: 12.5%;
+}
+
+#board td:hover {
+  outline-offset: -5px;
+  outline: 5px solid #94eded;
+}
+
+#board tr:nth-child(odd) td:nth-child(even),
+#board tr:nth-child(even) td:nth-child(odd) {
+    background-image: url("black.png");
+    background-position: left;
+    border-collapse: collapse;
+
+}
+
+#board td.present{ 
+  padding-bottom: 0px;
+}
+
+#board td.present img{ 
+  height: auto;
+  width: 100%;
+}
+
+.center {
+  text-align: center;
+  margin: auto;
+  padding-bottom: 40px;
+}
+
+
+.navbar, .container, .hero {
+  margin: 0;
+}
+
