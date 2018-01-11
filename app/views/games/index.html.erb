@@ -1,5 +1,13 @@
-<h2>AVAILABLE GAMES</h2>
-
-<% @games.each do |game| %>
-    <%= link_to game.name, game_path(game) %>
-<% end %>
+<div class="booyah-box col-10 offset-1">
+    <h2 class="center">AVAILABLE GAMES</h2> 
+    <div class="start-button center">
+	    <%= link_to 'Start Game', new_game_path, class: 'btn btn-primary button big' %>
+    </div>
+    <div class="row col-10 offset-1">
+      <div class="games-list">
+        <% @games.each do |game| %>
+          <p><%= game.name %><%= link_to 'Join', game_path(game) %></p>
+        <% end %>
+      </div>
+    </div>
+</div>
