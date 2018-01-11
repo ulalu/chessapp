@@ -143,6 +143,11 @@ body {
   padding-bottom: 0px;
 }
 
+#board td.present img{ 
+  height: auto;
+  width: 100%;
+}
+
 .center {
   text-align: center;
   margin: auto;
