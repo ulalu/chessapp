@@ -1,6 +1,14 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Francois+One');
 @import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
+
+//primary colors are blue-grey-dark: #62757f blue-grey-medium: #90a4ae blue-grey-light: #c1d5e0
+//secondary colors are teal-dark: #61babb teal-medium: #94eded teal-light: #c8ffff
+//use francois one for headers and accent text
+//use didact gothic for body text
+//
+
+
 h1 {
 	color: black;
 	font-size: 72px;
@@ -129,6 +137,11 @@ body {
     border-collapse: collapse;
     width: 11vh;
     padding-bottom: 12.5%;
+}
+
+#board td:hover {
+  outline-offset: -5px;
+  outline: 5px solid #94eded;
 }
 
 #board tr:nth-child(odd) td:nth-child(even),
