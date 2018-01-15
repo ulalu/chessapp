@@ -160,7 +160,7 @@ RSpec.describe Piece, type: :model do
         expect(piece1.is_same_color?(0, 3)).to eq false
       end
       
-      it "shows updated location" do
+      it "updates piece location" do
         piece = FactoryBot.create(:piece, position_x: 0, position_y: 0, color: 'black', game: game)
        
         piece.move_to!(0, 3)
