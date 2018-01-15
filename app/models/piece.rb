@@ -7,7 +7,7 @@ class Piece < ApplicationRecord
 	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
 	end
 	
-	# Determines if a piece is capturable or if a move can be made (changes db)
+	# Captures present piece if is capturable (changes db)
 	def capture!(x, y)
 	  if piece_present_at?(x, y)
 		  if capturable?(x, y)
