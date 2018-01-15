@@ -2,13 +2,7 @@ class Piece < ApplicationRecord
 
   belongs_to :game
   
-	# Changes captured piece attributes to reflect capture (changes db)
-	def update_captured_piece!(x, y)
-	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil,
-	                                              state: 'captured', dead: true)
-	end
-	
-	# Determines if a piece can be captured
+  # Determines if a piece can be captured
 	def capturable?(x, y)
 	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
 	end
@@ -25,6 +19,12 @@ class Piece < ApplicationRecord
 		  move_to!(x, y)
 		  return true
 		end
+	end
+  
+	# Changes captured piece attributes to reflect capture (changes db)
+	def update_captured_piece!(x, y)
+	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil,
+	                                              state: 'captured', dead: true)
 	end
 	
 	# Updates a piece location based on given coordinates (changes db)
