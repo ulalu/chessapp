@@ -2,10 +2,63 @@ class Piece < ApplicationRecord
 
   belongs_to :game
   
+  #===== Capture Logic ===========
+
+	# Changes captured piece attributes to reflect capture (changes db)
+	def update_captured_piece!(x, y)
+	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil,
+	                                              state: 'captured', dead: true)
+	end
+	
+	# Determines if a piece can be captured
+	def capturable?(x, y)
+	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
+	end
+	
+	# Determines if a piece is capturable or if a move can be made (changes db)
+	def capture!(x, y)
+	  if piece_present_at?(x, y)
+		  if capturable?(x, y)
+		    update_captured_piece!(x, y)
+		    move_to!(x, y)
+		    return true
+      end
+		else
+		  move_to!(x, y)
+		  return true
+		end
+	end
+	
+	# Updates a piece location based on given coordinates (changes db)
+	def move_to!(x, y)
+	  self.update_attributes(position_x: x, position_y: y)
+	end
+
+  # Checks if a piece is present at given location.
+  def piece_present_at?(x, y)
+    game.pieces.exists?(position_x: x, position_y: y)
+  end
+  
+  # Checks if pieces have same color
+  def is_same_color?(x, y)
+    game.pieces.find_by(position_x: x, position_y: y).color == self.color
+  end
+  
+  # returns a piece object from given coordinates
+  def present_piece(x, y)
+    game.pieces.find_by(position_x: x, position_y: y)
+  end
+  
+  # Determines if a piece can be captured
+  def capturable?(x, y)
+	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
+	end
+  
   # Determine if space has a piece present and isnt nil
   def obstruction_present?(x, y)
     game.pieces.find_by(position_x: x, position_y: y).nil?
   end
+# =================================
   
   # Determines if Piece color is black
   def black?
