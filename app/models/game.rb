@@ -49,27 +49,7 @@ class Game < ApplicationRecord
     King.create(game_id: id, type: 'King', color: 'black', position_x: 3, position_y: 7)
   end
   
-  def in_check?(king)
-    opposite_pieces = pieces.where(color: !king.color)
-    opposite_pieces.each do |piece|
-      if piece.valid_move?(king.position_x, king.position_y)
-        return true
-      else
-        return false
-      end
-    end
-  end
-  
-  def not_moved_to_different_space?(x,y)
-    position_x == x && y_position == y
-  end
-  
-  def valid_move_to?(x,y)
-    #not sure the in_check can be used this way, i think i need to write another method which prevents user 
-    #from moving king into check and use that instead
-    obstructed?(x,y) && off_the_board?(x,y) && not_moved_to_different_space?(x,y) && valid_move?(x,y)
-    #piece specific logic, i think this all needs to be refactored to have the same method name for checking the piece move logic
-  end
+end
   
 end
 
