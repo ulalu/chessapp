@@ -2,8 +2,6 @@ class Piece < ApplicationRecord
 
   belongs_to :game
   
-  #===== Capture Logic ===========
-
 	# Changes captured piece attributes to reflect capture (changes db)
 	def update_captured_piece!(x, y)
 	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil,
@@ -58,8 +56,7 @@ class Piece < ApplicationRecord
   def obstruction_present?(x, y)
     game.pieces.find_by(position_x: x, position_y: y).nil?
   end
-# =================================
-  
+
   # Determines if Piece color is black
   def black?
     color.eql?('black')
@@ -140,16 +137,6 @@ class Piece < ApplicationRecord
   # Checks if square is occupied
   def square_occupied?(x, y)
     game.pieces.where(position_x: x, position_y: y).present?
-  end
-  
-  def examine_path(position_x, position_y, end_x, end_y)
-    if position_y == end_y
-      'horizontal'
-    elsif position_x == end_x
-      'vertical'
-    elsif (end_y - position_y).abs == (end_x - position_x).abs
-      'diagonal'
-    end
   end
   
   # checks the path based on provided coodinates for obstruction
