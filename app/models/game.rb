@@ -50,7 +50,6 @@ class Game < ApplicationRecord
   end
   
   def in_check?(king)
-    
     opposite_pieces = pieces.where(color: !king.color)
     opposite_pieces.each do |piece|
       if piece.valid_move?(king.position_x, king.position_y)
@@ -59,6 +58,14 @@ class Game < ApplicationRecord
         return false
       end
     end
+  end
+  
+  def not_moved_to_different_space?(x,y)
+    position_x == x && y_position == y
+  end
+  
+  def valid_move_to?(x,y)
+    obstructed?(x, y) && in_check?(king) && off_the_board?(x, y) && not_moved_to_different_space?(x,y)
   end
   
 end

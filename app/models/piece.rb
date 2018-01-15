@@ -18,8 +18,11 @@ class Piece < ApplicationRecord
   end
   
   # Determines if pieces is being moved off board
-  def off_the_board(x, y)
-    (x < 0 || y < 0 || x > 7 || y > 7 )
+  def off_the_board?(x, y)
+    if (x < 0 || y < 0 || x > 7 || y > 7 )
+      return false
+    else
+      return true
   end
   
   def examine_path(position_x, position_y, end_x, end_y)
@@ -113,6 +116,8 @@ class Piece < ApplicationRecord
       return false
     end
   end
+    
+  
   
 end
 
