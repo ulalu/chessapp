@@ -7,7 +7,7 @@ class CreatePieces < ActiveRecord::Migration[5.0]
       t.string :color
       t.integer :position_x
       t.integer :position_y
-      t.boolean :dead
+      t.boolean :dead, default: false
       t.timestamps
     end
     change_column :pieces, :id, :bigint

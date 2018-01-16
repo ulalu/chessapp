@@ -23,8 +23,7 @@ class Piece < ApplicationRecord
   
 	# Changes captured piece attributes to reflect capture (changes db)
 	def update_captured_piece!(x, y)
-	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil,
-	                                              state: 'captured', dead: true)
+	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil, dead: true)
 	end
 	
 	# Updates a piece location based on given coordinates (changes db)
