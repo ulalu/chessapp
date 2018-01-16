@@ -141,8 +141,7 @@ RSpec.describe Piece, type: :model do
         
         expect(piece.position_x).to eq nil
         expect(piece.position_y).to eq nil
-        expect(piece.dead).to eq true
-        expect(piece.state).to eq 'captured'
+        expect(piece.dead).to eq true 
       
       end
       
