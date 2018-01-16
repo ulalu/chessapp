@@ -36,8 +36,8 @@ h3 {
 .main-nav {
   display: inline-block;
   float: right;
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
+}
 .logo {
   font-family: 'Francois One', sans-serif;
   text-transform: uppercase;
@@ -138,8 +138,12 @@ body {
     width: 11vh;
     padding-bottom: 12.5%;
 }
+.cell-highlight {
+  outline-offset: -5px;
+  outline: 5px solid #94eded;
+}
 
-#board td:hover {
+.hover-cell:hover {
   outline-offset: -5px;
   outline: 5px solid #94eded;
 }

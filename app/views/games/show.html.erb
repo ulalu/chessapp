@@ -4,7 +4,6 @@
     <%= link_to 'Home', root_path, class: 'btn btn-primary' %>
   </div>
 
-<<<<<<< HEAD
 <div class="board-container">
     <table id="board" style="width: 100%, height: auto">
     <% 8.times.each do |row| %>
@@ -12,7 +11,7 @@
         <% 8.times.each do |col| %>
           <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
           <% if piece.present? %>
-            <td class="<%= piece.color %>_<%= piece.type %>" data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
+            <td class="<%= piece.color %>_<%= piece.type %> hover-cell" data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
               <% image = "#{piece.color}_#{piece.type}.png" %>
               <%= image_tag image, class: 'draggable', id: "-data-piece-id=#{piece.id}" %>
             </td>
@@ -23,27 +22,6 @@
       </tr>
     <% end %>
   </table>
+  <span id="spnText"></span>
 </div>
-=======
-    <div class="board-container">
-        <table id="board">
-        <% 8.times.each do |row| %>
-          <tr id="row">
-            <% 8.times.each do |col| %>
-              <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
-              <% if piece.present? %>
-                <td class="present" data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
-                  <% image = "#{piece.color}_#{piece.type}.png" %>
-                  <%= image_tag image %>
-                </td>
-              <% else %>
-                <td></td>
-              <% end %>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
-</div>
->>>>>>> f96c044eb454d73024f10d0a6f3668b081ae9c91
+
