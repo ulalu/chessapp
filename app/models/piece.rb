@@ -13,11 +13,9 @@ class Piece < ApplicationRecord
 		  if capturable?(x, y)
 		    update_captured_piece!(x, y)
 		    move_to!(x, y)
-		    return true
       end
 		else
 		  move_to!(x, y)
-		  return true
 		end
 	end
   
