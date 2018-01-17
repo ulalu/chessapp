@@ -65,8 +65,12 @@ class Piece < ApplicationRecord
   end
   
   # Determines if pieces is being moved off board
-  def off_the_board(x, y)
-    (x < 0 || y < 0 || x > 7 || y > 7 )
+  def off_the_board?(x, y)
+    if (x < 0 || y < 0 || x > 7 || y > 7 )
+      return false
+    else
+      return true
+    end
   end
   
   def examine_path(position_x, position_y, end_x, end_y)
@@ -151,5 +155,31 @@ class Piece < ApplicationRecord
     end
   end
   
+  def in_check?(king)
+    opposite_pieces = pieces.where(color: !king.color)
+    opposite_pieces.each do |piece|
+      if piece.valid_move?(king.position_x, king.position_y)
+        return true
+      else
+        return false
+      end
+    end
+  end
+  
+  def not_moved_to_different_space?(x,y)
+    position_x == x && y_position == y
+  end
+  
+  def is_my_turn?
+    #write logic to check for whether it's the piece owner's turn here!
+    #maybe something like... @game.turn == current_player.color???? with the turn defined by color elsewhere?
+  end
+  
+  def valid_move?(x,y)
+    #i'm not sure I'm implementing in check correctly here. second set of eyes would be appreciated!
+    obstructed?(x,y) && off_the_board?(x,y) && in_check?(king) && not_moved_to_different_space?(x,y) && is_my_turn?
+    
+  end
+    
+  
 end
-

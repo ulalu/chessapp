@@ -49,17 +49,7 @@ class Game < ApplicationRecord
     King.create(game_id: id, type: 'King', color: 'black', position_x: 3, position_y: 7)
   end
   
-  def in_check?(king)
-    
-    opposite_pieces = pieces.where(color: !king.color)
-    opposite_pieces.each do |piece|
-      if piece.valid_move?(king.position_x, king.position_y)
-        return true
-      else
-        return false
-      end
-    end
-  end
+end
   
 end
 
