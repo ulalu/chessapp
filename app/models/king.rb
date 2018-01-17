@@ -1,5 +1,6 @@
 class King < Piece
-    def legal (x, y)
+    def valid_move?(x, y)
+        return false unless super.valid_move?
         correct_distance(x, y)
     end
     

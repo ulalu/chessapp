@@ -46,5 +46,8 @@ class Game < ApplicationRecord
     Queen.create(game_id: id, type: 'Queen', color: 'black', position_x: 4, position_y: 7)
     King.create(game_id: id, type: 'King', color: 'black', position_x: 3, position_y: 7)
   end
+  
+end
+  
 end
 

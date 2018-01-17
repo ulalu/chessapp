@@ -2,11 +2,58 @@ class Piece < ApplicationRecord
 
   belongs_to :game
   
+  # Determines if a piece can be captured
+	def capturable?(x, y)
+	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
+	end
+	
+	# Captures present piece if is capturable (changes db)
+	def capture!(x, y)
+	  if piece_present_at?(x, y)
+		  if capturable?(x, y)
+		    update_captured_piece!(x, y)
+		    move_to!(x, y)
+      end
+		else
+		  move_to!(x, y)
+		end
+	end
+  
+	# Changes captured piece attributes to reflect capture (changes db)
+	def update_captured_piece!(x, y)
+	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil, dead: true)
+	end
+	
+	# Updates a piece location based on given coordinates (changes db)
+	def move_to!(x, y)
+	  self.update_attributes(position_x: x, position_y: y)
+	end
+
+  # Checks if a piece is present at given location.
+  def piece_present_at?(x, y)
+    game.pieces.exists?(position_x: x, position_y: y)
+  end
+  
+  # Checks if pieces have same color
+  def is_same_color?(x, y)
+    game.pieces.find_by(position_x: x, position_y: y).color == self.color
+  end
+  
+  # returns a piece object from given coordinates
+  def present_piece(x, y)
+    game.pieces.find_by(position_x: x, position_y: y)
+  end
+  
+  # Determines if a piece can be captured
+  def capturable?(x, y)
+	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
+	end
+  
   # Determine if space has a piece present and isnt nil
   def obstruction_present?(x, y)
     game.pieces.find_by(position_x: x, position_y: y).nil?
   end
-  
+
   # Determines if Piece color is black
   def black?
     color.eql?('black')
@@ -18,8 +65,12 @@ class Piece < ApplicationRecord
   end
   
   # Determines if pieces is being moved off board
-  def off_the_board(x, y)
-    (x < 0 || y < 0 || x > 7 || y > 7 )
+  def off_the_board?(x, y)
+    if (x < 0 || y < 0 || x > 7 || y > 7 )
+      return false
+    else
+      return true
+    end
   end
   
   def examine_path(position_x, position_y, end_x, end_y)
@@ -89,16 +140,6 @@ class Piece < ApplicationRecord
     game.pieces.where(position_x: x, position_y: y).present?
   end
   
-  def examine_path(position_x, position_y, end_x, end_y)
-    if position_y == end_y
-      'horizontal'
-    elsif position_x == end_x
-      'vertical'
-    elsif (end_y - position_y).abs == (end_x - position_x).abs
-      'diagonal'
-    end
-  end
-  
   # checks the path based on provided coodinates for obstruction
   def obstructed?(x, y)
     path = examine_path(position_x, position_y, x, y)
@@ -114,5 +155,31 @@ class Piece < ApplicationRecord
     end
   end
   
+  def in_check?(king)
+    opposite_pieces = pieces.where(color: !king.color)
+    opposite_pieces.each do |piece|
+      if piece.valid_move?(king.position_x, king.position_y)
+        return true
+      else
+        return false
+      end
+    end
+  end
+  
+  def not_moved_to_different_space?(x,y)
+    position_x == x && y_position == y
+  end
+  
+  def is_my_turn?
+    #write logic to check for whether it's the piece owner's turn here!
+    #maybe something like... @game.turn == current_player.color???? with the turn defined by color elsewhere?
+  end
+  
+  def valid_move?(x,y)
+    #i'm not sure I'm implementing in check correctly here. second set of eyes would be appreciated!
+    obstructed?(x,y) && off_the_board?(x,y) && in_check?(king) && not_moved_to_different_space?(x,y) && is_my_turn?
+    
+  end
+    
+  
 end
-
