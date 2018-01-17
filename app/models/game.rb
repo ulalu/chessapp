@@ -51,5 +51,18 @@ class Game < ApplicationRecord
   
 end
   
+def put_in_check?(target_x, target_y)
+  current_state = false
+  ActiveRecord::Base.transaction do
+    move_friendly_piece(target_x, target_y)
+    current_state = king.where(color: king.color).in_check?
+    raise ActiveRecord::Rollback
+  end
+  reload
+  current_state
+end  
+
+def move_friendly_piece(x,y)
+  update_attributes(position_x: x, position_y: y)
 end
 
