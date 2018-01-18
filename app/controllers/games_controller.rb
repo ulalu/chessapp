@@ -13,9 +13,6 @@ class GamesController < ApplicationController
 		@game = current_user.games.create(game_create_params)
 		if @game.valid?
 			redirect_to game_path(@game)
-			# redirect to a new path that has the modal and THEN
-			# redirect to game path, showing whichever board is appropriate to their choice of army
-
 		else
 			redirect_to root_path, alert: "Could not create game."
 		end
@@ -32,7 +29,7 @@ class GamesController < ApplicationController
 	end
 	
 	def game_create_params
-		params.require(:game).permit(:name)
+		params.require(:game).permit(:name, :black_id, :white_id)
 	end
 
 end

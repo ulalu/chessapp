@@ -1,6 +1,10 @@
+<div class="booyah-box">
 <h1>Create A New Game</h1>
 <%= simple_form_for @game, url: games_path do |f| %>
   <%= f.input :name %>
+  <%= f.input :black_id, as: :boolean %>
+  <%= f.input :white_id, as: :boolean %>
   <br />
   <%= f.submit "Create", class: 'btn btn-primary' %>
   <% end %>
+</div>

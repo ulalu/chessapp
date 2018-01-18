@@ -37,7 +37,7 @@
 <div class="row col-10 offset-1">
   <div class="games-list">
     <% @games.each do |game| %>
-      <p><%= game.name %><%= link_to 'Join', game_path(game) # first route to modal, then to game %></p>
+      <p><%= game.name %><%= link_to 'Join', game_path(game) %></p>
     <% end %>
   </div>
 </div>
