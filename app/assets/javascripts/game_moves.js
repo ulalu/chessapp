@@ -11,6 +11,7 @@ $(function () {
 
 $(function () {
   $('#board td').on( 'click', function (data) {
+      $('.cell-highlight').removeClass('cell-highlight');
       $(this).toggleClass('cell-highlight');
       console.log(data);
   });
