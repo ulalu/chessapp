@@ -115,6 +115,80 @@ RSpec.describe Piece, type: :model do
            expect(piece.vertical_obstruct?(0)).to eq false
          end
       end
+      
+      
     end
   end
+  
+  describe '#capture!' do
+      
+      before do
+        game.pieces.map do |piece|
+          piece.destroy!
+        end
+      end
+      
+      it "update captured piece values to reflect capture" do
+        rook = FactoryBot.create(:rook, position_x: 0, position_y: 0, color: 'white', game: game)
+        piece = FactoryBot.create(:piece, position_x: 0, position_y: 3, color: 'black', game: game)
+        
+        rook.capture!(0, 3)
+    
+        piece.reload
+        
+        expect(rook.position_x).to eq 0
+        expect(rook.position_y).to eq 3
+        
+        expect(piece.position_x).to eq nil
+        expect(piece.position_y).to eq nil
+        expect(piece.dead).to eq true 
+      
+      end
+      
+      it "return true if pieces are the same color" do
+        piece1 = FactoryBot.create(:piece, position_x: 0, position_y: 0, color: 'black', game: game)
+        piece2 = FactoryBot.create(:piece, position_x: 0, position_y: 3, color: 'black', game: game)
+        
+        expect(piece1.is_same_color?(0, 3)).to eq true
+      end
+      
+      it "returns false is not same color" do
+        piece1 = FactoryBot.create(:piece, position_x: 0, position_y: 0, color: 'black', game: game)
+        piece2 = FactoryBot.create(:piece, position_x: 0, position_y: 3, color: 'white', game: game)
+        
+        expect(piece1.is_same_color?(0, 3)).to eq false
+      end
+      
+      it "updates piece location" do
+        piece = FactoryBot.create(:piece, position_x: 0, position_y: 0, color: 'black', game: game)
+       
+        piece.move_to!(0, 3)
+        piece.reload
+        
+        expect(piece.position_x).to eq 0
+        expect(piece.position_y).to eq 3
+      end
+      
+      it "returns true if a piece is present" do
+        piece1 = FactoryBot.create(:piece, position_x: 0, position_y: 0, color: 'black', game: game)
+        piece2 = FactoryBot.create(:piece, position_x: 0, position_y: 3, color: 'white', game: game)
+        
+        expect(piece1.piece_present_at?(0, 3)).to eq true
+      end
+      
+      
+      it "returns true if present piece is capturable?" do
+        piece1 = FactoryBot.create(:piece, position_x: 0, position_y: 0, color: 'black', game: game)
+        piece2 = FactoryBot.create(:piece, position_x: 0, position_y: 3, color: 'white', game: game)
+        
+        expect(piece1.capturable?(0, 3)).to eq true
+      end
+      
+      it "returns false if present piece isnt capturable?" do
+        piece1 = FactoryBot.create(:piece, position_x: 0, position_y: 0, color: 'black', game: game)
+        piece2 = FactoryBot.create(:piece, position_x: 0, position_y: 3, color: 'black', game: game)
+        
+        expect(piece1.capturable?(0, 3)).to eq false
+      end
+    end
 end
