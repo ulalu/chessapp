@@ -139,8 +139,14 @@ class Piece < ApplicationRecord
   end
   
   def valid_move?(x,y)
-    #i'm not sure I'm implementing in check correctly here. second set of eyes would be appreciated!
-    obstructed?(x,y) && off_the_board?(x,y) && in_check?(king) && not_moved_to_different_space?(x,y) && is_my_turn?
+    return false, 'move is obstructed' if obstructed?(x,y)
+    return false, 'move is off the board' unless off_the_board?(x,y) 
+    return false, 'king is in check' if in_check?(king) 
+    return false, 'the piece has not moved' unless not_moved_to_different_space?(x,y)
+    return false, 'wait for your turn' if is_my_turn? #this will need editing depending on turn logic
+    true
+  end
+    
     
   end
     
