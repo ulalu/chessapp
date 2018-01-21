@@ -152,11 +152,14 @@ body {
 
 }
 
-#board td.present{ 
+#board td{ 
   padding-bottom: 0px;
+  height: 50px;
+  width: 50px;
+
 }
 
-#board td.present img{ 
+#board td img{ 
   height: auto;
   width: 100%;
 }
