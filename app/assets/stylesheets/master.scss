@@ -143,7 +143,7 @@ body {
   outline: 5px solid red;
 }
 
-.hover-cell:hover {
+.board td:hover {
   outline-offset: -5px;
   outline: 5px solid #94eded;
 }
@@ -153,7 +153,6 @@ body {
     background-image: url("black.png");
     background-position: left;
     border-collapse: collapse;
-
 }
 
 #board td.present{ 
