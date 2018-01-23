@@ -138,17 +138,34 @@ class Piece < ApplicationRecord
     #maybe something like... @game.turcann == current_player.color???? with the turn defined by color elsewhere?
   end
   
-  def valid_move?(x,y, king)
+  def valid_move?(x,y,king)
     invalid_reason = Hash.new
     if obstructed?(x,y)
       return false
       invalid_reason['invalid'] = "there is a piece between your start and end point"
       return invalid_reason
-    elsif
-    return false, 'move is obstructed' if obstructed?(x,y)
-    return false, 'move is off the board' unless off_the_board?(x,y) 
-    return false, 'king is in check' if in_check?(king) 
-    return false, 'the piece has not moved' unless not_moved_to_different_space?(x,y)
+    elsif off_the_board?(x,y) == true
+      return false 
+      invalid_reason['invalid'] = "you cannot place your piece off the board"
+      return invalid_reason['invalid']
+    elsif in_check?(king)
+      return false
+      invalid_reason['invalid'] = "if you make this move your king is in check"
+      return invalid_reason['invalid']
+    elsif not_moved_to_different_space?(x,y) == true
+      return false
+      invalid_reason['invalid'] = "you haven't moved your piece"
+      return invalid_reason['invalid']
+    #this portion will need to be refactored based on turn logic
+    elsif is_my_turn?
+      return false
+      invalid_reason['invalid'] = 'wait for your turn.'
+      return invalid_reason['invalid']
+    else
+      return true
+    end
+    
+  
     return false, 'wait for your turn' if is_my_turn? #this will need editing depending on turn logic
     true
   end
