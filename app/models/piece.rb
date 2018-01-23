@@ -138,7 +138,13 @@ class Piece < ApplicationRecord
     #maybe something like... @game.turcann == current_player.color???? with the turn defined by color elsewhere?
   end
   
-  def valid_move?(x,y)
+  def valid_move?(x,y, king)
+    invalid_reason = Hash.new
+    if obstructed?(x,y)
+      return false
+      invalid_reason['invalid'] = "there is a piece between your start and end point"
+      return invalid_reason
+    elsif
     return false, 'move is obstructed' if obstructed?(x,y)
     return false, 'move is off the board' unless off_the_board?(x,y) 
     return false, 'king is in check' if in_check?(king) 
