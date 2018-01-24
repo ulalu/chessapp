@@ -18,18 +18,32 @@ class GamesController < ApplicationController
 		end
 	end
 
+	def update
+		render status: 400, json: {
+			text: 'Invalid Move'
+		}
+		
+		
+	end
+
 	def show
 		@game = Game.find(params[:id])
 	end
 	
 	private
-	
-	def current_game
-		@current_game ||= Game.find(params[:id])
-	end
-	
+
+	# def move_valid?
+	# 	@valid_move? ||= Piece
+	# end
+
+
 	def game_create_params
 		params.require(:game).permit(:name, :black_id, :white_id)
 	end
 
 end
+
+# def http_status
+# 	return :ok if move_valid?
+# 	:forbidden
+# end
