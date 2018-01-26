@@ -18,12 +18,15 @@ class GamesController < ApplicationController
 		end
 	end
 
-	def update
-		render status: 400, json: {
-			text: 'Invalid Move'
-		}
-		
-		
+	def move
+		@piece = Piece.find(params[:piece_id])
+		# if @piece.valid_move?(params[:position_x], params[:position_y])
+		# 	@piece.update_attributes(:position_x, :position_y)
+		if true
+			render status: 200, json: {valid: true}
+		else
+			render status: :unauthorized, json: {valid: false}
+		end
 	end
 
 	def show
@@ -32,10 +35,9 @@ class GamesController < ApplicationController
 	
 	private
 
-	# def move_valid?
-	# 	@valid_move? ||= Piece
-	# end
-
+	def piece_params
+		params.require(:piece).permit(:piece_id, :position_x, :position_y)
+	end
 
 	def game_create_params
 		params.require(:game).permit(:name)
@@ -43,7 +45,3 @@ class GamesController < ApplicationController
 
 end
 
-# def http_status
-# 	return :ok if move_valid?
-# 	:forbidden
-# end
