@@ -197,8 +197,8 @@ RSpec.describe Piece, type: :model do
       it "should return false if the piece has been moved off the board" do
         piece1 = FactoryBot.create(:piece)
         
-        expect(piece1.valid_move?(-1, 0)).to eq false, "you cannot place your piece off the board"
-        expect(piece1.valid_move?(0, 9)).to eq false, "you cannot place your piece off the board"
+        expect(piece1.valid_move?(-1, 0)).to eq false
+        expect(piece1.valid_move?(0, 9)).to eq false
       end 
     end
 end

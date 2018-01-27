@@ -143,18 +143,25 @@ class Piece < ApplicationRecord
 	end
   
   def valid_move?(x,y,king=nil)
-    
-    #in game_moves.js, first check if the thing is false, then use string for alert
-    return false, 'there is a piece between your start and end point' if obstructed?(x,y) 
-    return false, "you cannot place your piece off the board" unless off_the_board?(x,y)
-    return false, "if you make this move your king is in check" if in_check?(king)
-    return false, "you haven't moved your piece" unless not_moved_to_different_space?(x,y)
-    return false, "you cannot move a piece on top of your own pieces" if occupied?(x,y)
+    return false if obstructed?(x,y) 
+    return false unless off_the_board?(x,y)
+    #return false if in_check?(king)
+    return false unless not_moved_to_different_space?(x,y)
+    return false if occupied?(x,y)
     #this portion will need to be refactored based on how turn logic is built
     #return false, "wait for your turn" if is_my_turn?
-    return true
+    else return true
   end
-
-
+  
+  def valid_move_reason(x,y)
+    if !valid_move?(x,y)
+      return 'there is a piece between your start and end point' if obstructed?(x,y) 
+      return "you cannot place your piece off the board" unless off_the_board?(x,y)
+      return "if you make this move your king is in check" if in_check?(king)
+      return "you haven't moved your piece" unless not_moved_to_different_space?(x,y)
+      return "you cannot move a piece on top of your own pieces" if occupied?(x,y)
+    end
+  end
+  
 end
 

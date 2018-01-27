@@ -7,7 +7,7 @@ RSpec.describe Rook, type: :model do
 				game = FactoryBot.create(:game, user: user)
 				rook = FactoryBot.create(:rook, position_x: 0, position_y: 0, game: game)
 
-				expect(rook.valid_move(0, 4)).to eq(true)
+				expect(rook.valid_move?(0, 4)).to eq(true)
 			end
 		end
 end
