@@ -19,8 +19,8 @@ class GamesController < ApplicationController
 	end
 
 	def update
-		render status: 400, json: {
-			text: 'Invalid Move'
+		render status: 200, json: {
+			text: 'Valid Move'
 		}
 		
 		
@@ -38,7 +38,7 @@ class GamesController < ApplicationController
 
 
 	def game_create_params
-		params.require(:game).permit(:name, :black_id, :white_id)
+		params.require(:game).permit(:name, :email)
 	end
 
 end
