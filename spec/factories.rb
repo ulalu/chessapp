@@ -12,6 +12,12 @@ FactoryBot.define do
     association :user
   end
   
+  factory :empty_game, class: Game do
+    name "funkychess"
+    association :user
+    after(:create) { |game| game.pieces.destroy_all }
+  end
+  
   factory :piece do
     type 'Rook'
     special 'none'

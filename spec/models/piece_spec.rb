@@ -51,30 +51,30 @@ RSpec.describe Piece, type: :model do
         end
       end
     
-      describe 'diagonal down' do
+      describe 'diagonal up' do
         let(:piece) { FactoryBot.create(:piece, position_x: 0, position_y: 0, game: game) }
         
-        it 'returns true if diagonal down is obstructed' do
+        it 'returns true if diagonal up is obstructed' do
           obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 2, game: game)
           
           expect(piece.diagonal_obstruct?(4, 4)).to eq true
         end
         
-        it 'returns false if diagonal down isnt obstructed' do
+        it 'returns false if diagonal up isnt obstructed' do
           expect(piece.diagonal_obstruct?(4, 4)).to eq false
         end
       end
       
-      describe 'diagonal up' do
+      describe 'diagonal down' do
         let(:piece) { FactoryBot.create(:piece, position_x: 4, position_y: 4, game: game) }
         
-        it 'returns true if diagonal up is obstructed' do
+        it 'returns true if diagonal down is obstructed' do
           obstruction = FactoryBot.create(:piece, position_x: 2, position_y: 2, game: game)
         
           expect(piece.diagonal_obstruct?(0, 0)).to eq true
         end
         
-        it 'returns false if diagonal up isnt obstructed' do
+        it 'returns false if diagonal down isnt obstructed' do
           expect(piece.diagonal_obstruct?(0, 0)).to eq false
         end
       end

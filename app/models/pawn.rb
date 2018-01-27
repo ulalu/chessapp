@@ -1,8 +1,8 @@
 class Pawn < Piece
   
   # Determines if pawn is making a valid
-  def valid_move?(x, y)
-    return false unless super.valid_move?
+  def valid_move?(x,y)
+    return false unless super
     y_diff = y - position_y if white?
     y_diff = position_y - y if black?
     

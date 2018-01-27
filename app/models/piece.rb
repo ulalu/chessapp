@@ -66,32 +66,32 @@ class Piece < ApplicationRecord
   # Determines if pieces is being moved off board
   def off_the_board?(x, y)
     if (x < 0 || y < 0 || x > 7 || y > 7 )
-      return false
-    else
       return true
+    else
+      return false
     end
   end
   
-  def examine_path(position_x, position_y, end_x, end_y)
-    if position_y == end_y
+  def examine_path(x,y)
+    if position_y == y
       'horizontal'
-    elsif position_x == end_x
+    elsif position_x == x
       'vertical'
-    elsif (end_y - position_y).abs == (end_x - position_x).abs
+    elsif (y - position_y).abs == (x - position_x).abs
       'diagonal'
     end
   end
   
   # Checks checks for horizontal obstruction
-  def horizontal_obstruct?(end_x)
+  def horizontal_obstruct?(x)
     # Checks horizontal left
-    if position_x < end_x 
-      (position_x + 1).upto(end_x - 1) do |x|
+    if position_x < x 
+      (position_x + 1).upto(x - 1) do |x|
         return true if square_occupied?(x, position_y)
       end
     # Checks right
-    elsif position_x > end_x
-      (position_x - 1).downto(end_x + 1) do |x|
+    elsif position_x > x
+      (position_x - 1).downto(x + 1) do |x|
         return true if square_occupied?(x, position_y)
       end
     end
@@ -99,15 +99,15 @@ class Piece < ApplicationRecord
   end
   
   # Checks for vertical obstruction
-  def vertical_obstruct?(end_y)
+  def vertical_obstruct?(y)
     # checks vertical down
-    if position_y < end_y
-      (position_y + 1).upto(end_y - 1) do |y|
+    if position_y < y
+      (position_y + 1).upto(y - 1) do |y|
         return true if square_occupied?(position_x, y)
       end
     # checks vertical up
-    elsif position_y > end_y
-      (position_y - 1).downto(end_y + 1) do |y|
+    elsif position_y > y
+      (position_y - 1).downto(y + 1) do |y|
         return true if square_occupied?(position_x, y)
       end
     end
@@ -115,20 +115,22 @@ class Piece < ApplicationRecord
   end
 
   # Checks for diagonal_obstruction
-  def diagonal_obstruct?(end_x, end_y)
+  def diagonal_obstruct?(x, y)
     # Checks diagonal and down
-    if position_x < end_x
-      (position_x + 1).upto(end_x - 1) do |x|
-        diag_y = x - position_x
-        y = end_y > position_y ? position_y + diag_y : position_y - diag_y
-        return true if square_occupied?(x, y)
+    if position_x < x
+      ((position_x + 1)...x).each do |intermediate_x|
+        y_change = intermediate_x - position_x
+        intermediate_y = y > position_y ? position_y + y_change : position_y - y_change
+        if square_occupied?(intermediate_x, intermediate_y)
+          return true
+        end
       end
     # Checks diagonal and up
-    elsif position_x > end_x
-      (position_x - 1).downto(end_x + 1) do |x|
-        diag_y = position_x - x
-        y = end_y > position_y ? position_y + diag_y : position_y - diag_y
-        return true if square_occupied?(x, y)
+    elsif position_x > x
+      ((x + 1)...position_x).each do |intermediate_x|
+        y_change = position_x - intermediate_x
+        intermediate_y = y > position_y ? position_y + y_change : position_y - y_change
+        return true if square_occupied?(intermediate_x, intermediate_y)
       end
     end
     false
@@ -139,28 +141,29 @@ class Piece < ApplicationRecord
     game.pieces.where(position_x: x, position_y: y).present?
   end
   
-  def examine_path(position_x, position_y, end_x, end_y)
-    if position_y == end_y
+  def examine_path(x, y)
+    if position_y == y
       'horizontal'
-    elsif position_x == end_x
+    elsif position_x == x
       'vertical'
-    elsif (end_y - position_y).abs == (end_x - position_x).abs
+    elsif (y - position_y).abs == (x - position_x).abs
       'diagonal'
     end
   end
   
   # checks the path based on provided coodinates for obstruction
-  def obstructed?(x, y)
-    path = examine_path(position_x, position_y, x, y)
+  def obstructed?(x,y)
+    path = examine_path(x,y)
     
-    if path
-      return horizontal_obstruct?(x) if path == 'horizontal'
-  
-      return vertical_obstruct?(y) if path == 'vertical'
-  
-      return diagonal_obstruct?(x, y) if path == 'diagonal'
+    case path
+    when 'horizontal'
+      horizontal_obstruct?(x)
+    when 'vertical'
+      vertical_obstruct?(y)
+    when 'diagonal'
+      diagonal_obstruct?(x, y)
     else
-      return false
+      false
     end
   end
   
@@ -176,7 +179,7 @@ class Piece < ApplicationRecord
   end
   
   def not_moved_to_different_space?(x,y)
-    position_x == x && y_position == y
+    position_x == x && position_y == y
   end
   
   def is_my_turn?
@@ -190,13 +193,13 @@ class Piece < ApplicationRecord
   
   def valid_move?(x,y,king=nil)
     return false if obstructed?(x,y) 
-    return false unless off_the_board?(x,y)
+    return false if off_the_board?(x,y)
     #return false if in_check?(king)
-    return false unless not_moved_to_different_space?(x,y)
+    return false if not_moved_to_different_space?(x,y)
     return false if occupied?(x,y)
     #this portion will need to be refactored based on how turn logic is built
     #return false, "wait for your turn" if is_my_turn?
-    else return true
+    return true
   end
   
   def valid_move_reason(x,y)
