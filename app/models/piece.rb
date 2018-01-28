@@ -183,8 +183,7 @@ class Piece < ApplicationRecord
   end
   
   def is_my_turn?
-    #write logic to check for whether it's the piece owner's turn here!
-    #maybe something like... @game.turcann == current_player.color???? with the turn defined by color elsewhere?
+    user_id == game.turn
   end
   
   def occupied?(x,y)
@@ -197,8 +196,7 @@ class Piece < ApplicationRecord
     #return false if in_check?(king)
     return false if not_moved_to_different_space?(x,y)
     return false if occupied?(x,y)
-    #this portion will need to be refactored based on how turn logic is built
-    #return false, "wait for your turn" if is_my_turn?
+    return false if is_my_turn?
     return true
   end
   
@@ -206,11 +204,22 @@ class Piece < ApplicationRecord
     if !valid_move?(x,y)
       return 'there is a piece between your start and end point' if obstructed?(x,y) 
       return "you cannot place your piece off the board" unless off_the_board?(x,y)
-      return "if you make this move your king is in check" if in_check?(king)
+      #return "if you make this move your king is in check" if in_check?(king)
       return "you haven't moved your piece" unless not_moved_to_different_space?(x,y)
       return "you cannot move a piece on top of your own pieces" if occupied?(x,y)
+      return "wait for your turn" unless is_my_turn?
     end
   end
+  
+  def change_turns
+    if user_id == game.white_id
+      game.update_attributes(turn: game.black_id)
+    else
+      game.update_attributes(turn: game.white_id)
+    end
+  end
+  
+  
   
 end
 
