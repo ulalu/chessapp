@@ -22,4 +22,14 @@ class Pawn < Piece
   def promotable?(x, y)
     (color.eql?('black') && position_y.eql?(0) || color.eql?('white') && position_y.eql?(7))
   end
+  
+  def promotion!(x, y)
+    if promotable?(x, y)
+      pawn_piece = present_piece(x, y)
+      pawn_piece.update_attributes(position_x: nil, position_y: nil, dead: true)
+      game.pieces.create(type: 'Queen', position_x: x, position_y: y,
+      special: 'promoted', color: color)
+    end
+  end
+  
 end
