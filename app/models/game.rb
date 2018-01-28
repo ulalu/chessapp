@@ -17,7 +17,6 @@ class Game < ApplicationRecord
         end
       end
     end
-    debugger
     return false if possible_moves.any?
     true
   end
