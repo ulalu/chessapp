@@ -177,8 +177,8 @@ class Piece < ApplicationRecord
   
   def valid_move?(x,y)
     #i'm not sure I'm implementing in check correctly here. second set of eyes would be appreciated!
-    obstructed?(x,y) && off_the_board?(x,y) && in_check?(king) && not_moved_to_different_space?(x,y) && is_my_turn?
-    
+    #obstructed?(x,y) && off_the_board?(x,y) && in_check?(king) && not_moved_to_different_space?(x,y) && is_my_turn?
+    #
   end
     
   

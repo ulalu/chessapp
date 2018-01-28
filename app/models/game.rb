@@ -10,13 +10,16 @@ class Game < ApplicationRecord
   def stalemate?(color)
     current_pieces = friendly_pieces(color)
     possible_moves = []
-    friendly_pieces.each do |piece|
+    current_pieces.each do |piece|
       8.times do |x|
         8.times do |y|
           possible_moves << [x, y] if piece.valid_move?(x, y)
         end
       end
     end
+    debugger
+    return false if possible_moves.any?
+    true
   end
   
   def friendly_pieces(color)
