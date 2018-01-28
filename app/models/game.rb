@@ -7,6 +7,26 @@ class Game < ApplicationRecord
   after_create :populate_board
   
   
+  def stalemate?(color)
+    current_pieces = friendly_pieces(color)
+    possible_moves = []
+    friendly_pieces.each do |piece|
+      8.times do |x|
+        8.times do |y|
+          possible_moves << [x, y] if piece.valid_move?(x, y)
+        end
+      end
+    end
+  end
+  
+  def friendly_pieces(color)
+   team_color = if color = 'black'
+                  'black'
+                  else
+                  'white' 
+                 end
+    pieces.where(color: team_color)
+  end
   
 	# Will determine if move of friendly piece will cause check 
   def put_in_check?(target_x, target_y)
