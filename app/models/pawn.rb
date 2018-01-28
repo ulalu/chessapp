@@ -19,4 +19,7 @@ class Pawn < Piece
     ((position_y).eql?(1) && white? || (position_y).eql?(6) && black?)
   end
   
+  def promotable?(x, y)
+    (color.eql?('black') && position_y.eql?(0) || color.eql?('white') && position_y.eql?(7))
+  end
 end
