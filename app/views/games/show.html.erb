@@ -5,15 +5,15 @@
   </div>
 
     <div class="board-container">
-        <table id="board">
+        <table id="board" data-game_id="<%= @game.id %>">
         <% 8.times.each do |row| %>
           <tr id="row">
             <% 8.times.each do |col| %>
               <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
               <% if piece.present? %>
-                <td class="present" data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
-                  <% image = "#{piece.color}_#{piece.type}.png" %>
-                  <%= image_tag image %>
+                <td data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
+                  <% image ="#{piece.color}_#{piece.type}.png" %>
+                  <%= image_tag(image, class: "piece_image") %>
                 </td>
               <% else %>
                 <td></td>
@@ -25,3 +25,4 @@
     </div>
   </div>
 </div>
+
