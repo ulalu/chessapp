@@ -60,6 +60,7 @@ def put_in_check?(target_x, target_y)
     raise ActiveRecord::Rollback
   end
   reload
+  
   current_state
 end  
 
