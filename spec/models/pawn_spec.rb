@@ -21,4 +21,33 @@ RSpec.describe Pawn, type: :model do
     end
   end
   
+  describe '#promotable?' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:game) { FactoryBot.create(:game, user: user) }
+    
+    it 'returns true if pawn is promotable?' do
+      pawn = FactoryBot.create(:pawn, position_x: 2, position_y: 0, color: 'black', game: game)
+      
+      expect(pawn.promotable?).to eq true
+    end
+    
+    it 'returns false if not promotable?' do
+      pawn = FactoryBot.create(:pawn, position_x: 2, position_y: 0, color: 'white', game: game)
+      
+      expect(pawn.promotable?).to eq false
+    end
+  end
+  
+  describe '#promote!' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:game) { FactoryBot.create(:game, user: user) }
+    
+    it 'returns type queen if promotion successful' do
+      pawn = FactoryBot.create(:pawn, position_x: 2, position_y: 0, color: 'black', game: game)
+      pawn.promote!(2, 0)
+      expect(game.pieces.find_by(position_x: 2, position_y: 0).type).to eql 'Queen'
+    end
+    
+  end
+  
 end

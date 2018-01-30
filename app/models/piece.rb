@@ -183,6 +183,7 @@ class Piece < ApplicationRecord
     #maybe something like... @game.turcann == current_player.color???? with the turn defined by color elsewhere?
   end
   
+
   def occupied?(x,y)
 	  (piece_present_at?(x,y)) && is_same_color?(x,y)
 	end
@@ -194,7 +195,7 @@ class Piece < ApplicationRecord
     return false if not_moved_to_different_space?(x,y)
     return false if occupied?(x,y)
     #this portion will need to be refactored based on how turn logic is built
-    #return false, "wait for your turn" if is_my_turn?
+    #return false if is_my_turn?
     return true
   end
   
@@ -205,7 +206,9 @@ class Piece < ApplicationRecord
       return "if you make this move your king is in check" if in_check?(king)
       return "you haven't moved your piece" unless not_moved_to_different_space?(x,y)
       return "you cannot move a piece on top of your own pieces" if occupied?(x,y)
+      #return "wait for your turn" if is_my_turn?
     end
+    
   end
   
 end
