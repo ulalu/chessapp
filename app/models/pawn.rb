@@ -29,5 +29,5 @@ class Pawn < Piece
       pawn_piece.update_attributes(type: 'Queen', special: 'promoted')
     end
   end
-  
+
 end
