@@ -1,21 +1,17 @@
 class Piece < ApplicationRecord
 
   belongs_to :game
-   # Determines if a piece can be captured
- 	def capturable?(x, y)
- 	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
- 	end
- 	
+   
  	# Captures present piece if is capturable (changes db)
  	def capture!(x, y)
  	  if piece_present_at?(x, y)
- 		  if capturable?(x, y)
- 		    update_captured_piece!(x, y)
- 		    move_to!(x, y)
-       end
- 		else
- 		  move_to!(x, y)
- 		end
+ 	    if capturable?(x, y)
+ 	      update_captured_piece!(x, y)
+ 	      move_to!(x, y)
+       	    end
+ 	  else
+ 	      move_to!(x, y)
+ 	  end
  	end
    
  	# Changes captured piece attributes to reflect capture (changes db)
