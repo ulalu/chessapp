@@ -19,7 +19,6 @@ class Pawn < Piece
     ((position_y).eql?(1) && white? || (position_y).eql?(6) && black?)
   end
   
-
   def promotable?
     (color.eql?('black') && position_y.eql?(0) || color.eql?('white') && position_y.eql?(7))
   end
@@ -30,4 +29,5 @@ class Pawn < Piece
       pawn_piece.update_attributes(type: 'Queen', special: 'promoted')
     end
   end
+
 end
