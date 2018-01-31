@@ -4,27 +4,30 @@
     <%= link_to 'Home', root_path, class: 'btn btn-primary' %>
   </div>
 
+
+<!--   Flip board here -->
+
     <div class="board-container">
       <table id="board" data-game_id="<%= @game.id %>">
           <% 8.times.each do |row| %>
-            <tr id="row">
-              <% 8.times.each do |col| %>
-                <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
+          <tr id="row">
+            <% 8.times.each do |col| %>
+              <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
+              <td data-row="<%= row %>" data-col="<%= col %>">
                 <% if piece.present? %>
-                  <td data-piece_id="<%= piece %>" data-piece_name="<%= piece.color %>_<%= piece.type %>">
+                  <div data-piece_id="<%= piece.id %>" data-piece_name="<%= piece.color %>_<%= piece.type %>" class="piece_image" data-row="<%= row %>" data-col="<%= col %>">
                     <% image ="#{piece.color}_#{piece.type}.png" %>
-                    <%= image_tag(image, class: "piece_image") %>
-                  </td>
-                <% else %>
-                  <td></td>
+                    <%= image_tag(image) %>
+                  </div>
                 <% end %>
-              <% end %>
-            </tr>
+              </td>
+            <% end %>
+          </tr>
           <% end %>
       </table>
     </div>
     
-    
 
   </div>
 </div>
+
