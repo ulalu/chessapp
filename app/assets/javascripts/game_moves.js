@@ -32,7 +32,7 @@ $(function() {
         var col = $(ui.draggable).data('col');
         debugger;
         $(ui.draggable).detach().css({top: 0,left: 0}).appendTo('td[data-row='+row+'][data-col='+col+']');
-      //  alert("Invalid move. Try again.");
+       // alert("Invalid move. Try again.");
       });
     }
   });

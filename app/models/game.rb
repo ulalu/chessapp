@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   has_many :pieces
 
   validates :name, presence: true
-  after_create :populate_board
+  after_create :populate_board 
 
   
   def stalemate?(color)
