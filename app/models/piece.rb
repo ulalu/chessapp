@@ -167,36 +167,25 @@ class Piece < ApplicationRecord
     end
   end
   
-  def in_check?(king)
-    opposite_pieces = pieces.where(color: !king.color)
-    opposite_pieces.each do |piece|
-      if piece.valid_move?(king.position_x, king.position_y)
-        return true
-      else
-        return false
-      end
-    end
-  end
-  
   def not_moved_to_different_space?(x,y)
     position_x == x && position_y == y
   end
   
-  def is_my_turn?
-    user_id == game.turn
-  end
+  # def is_my_turn?
+  #   user_id == game.turn
+  # end
   
   def occupied?(x,y)
 	  (piece_present_at?(x,y)) && is_same_color?(x,y)
 	end
   
-  def valid_move?(x,y,king=nil)
+  def valid_move?(x,y,color = nil)
     return false if obstructed?(x,y) 
     return false if off_the_board?(x,y)
-    #return false if in_check?(king)
+    #return false if in_check?(color)
     return false if not_moved_to_different_space?(x,y)
     return false if occupied?(x,y)
-    return false if is_my_turn?
+    #return false if is_my_turn?
     return true
   end
   

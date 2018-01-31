@@ -49,14 +49,38 @@ class Game < ApplicationRecord
     King.create(game_id: id, type: 'King', color: 'black', position_x: 3, position_y: 7)
   end
   
-end
+
+
+  def in_check?(color)
+    possible_check_pieces = []
+    king = locate_king(color)
+    opposite_pieces = opposing_color_pieces(color)
+    opposite_pieces.each do |piece|
+      if piece.valid_move?(king.position_x, king.position_y).eql?(true)
+        possible_check_pieces << piece
+      end
+    end
+    possible_check_pieces.any?
+    
+  end
+  
+  def locate_king(color)
+    pieces.find_by(type: "King", color:color)
+  end
+
+  def opposing_color_pieces(color)
+    opposite_color = color == 'black' ? 'white' : 'black'
+    pieces.where(color: opposite_color).to_a
+    
+  end
 
 # Will determine if move of friendly piece will cause check 
 def put_in_check?(target_x, target_y)
   current_state = false
+  king = locate_king(color)
   ActiveRecord::Base.transaction do
     move_friendly_piece(target_x, target_y)
-    current_state = king.where(color: king.color).in_check?
+    current_state = king.where(color: king.color).in_check?(color)
     raise ActiveRecord::Rollback
   end
   reload
@@ -70,3 +94,4 @@ def move_friendly_piece(x,y)
 end
 
 
+end
