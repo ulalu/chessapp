@@ -1,3 +1,11 @@
+$(function () {
+  $('#board td').on( 'click', function (data) {
+      $('.cell-highlight').removeClass('cell-highlight');
+      $(this).toggleClass('cell-highlight');
+      console.log(data);
+  });
+});
+
 $(function() {
   $( ".piece_image" ).draggable({revert: true});
   $( "td" ).droppable({
@@ -15,6 +23,7 @@ $(function() {
           piece_id: $(ui.draggable).data("piece_id")
         }
       })
+
       .success(function(data){
         $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(that);
       })
@@ -23,8 +32,9 @@ $(function() {
         var col = $(ui.draggable).data('col');
         debugger;
         $(ui.draggable).detach().css({top: 0,left: 0}).appendTo('td[data-row='+row+'][data-col='+col+']');
-      //  alert("Invalid move. Try again.");
+       // alert("Invalid move. Try again.");
       });
     }
   });
 });
+

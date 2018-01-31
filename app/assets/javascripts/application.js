@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require jquery-ui
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+//= require jquery-ui

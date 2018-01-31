@@ -4,9 +4,12 @@
     <%= link_to 'Home', root_path, class: 'btn btn-primary' %>
   </div>
 
+
+<!--   Flip board here -->
+
     <div class="board-container">
-        <table id="board" data-game_id="<%= @game.id %>">
-        <% 8.times.each do |row| %>
+      <table id="board" data-game_id="<%= @game.id %>">
+          <% 8.times.each do |row| %>
           <tr id="row">
             <% 8.times.each do |col| %>
               <% piece = @game.pieces.where(position_x: col, position_y: row).first %>
@@ -20,9 +23,11 @@
               </td>
             <% end %>
           </tr>
-        <% end %>
+          <% end %>
       </table>
     </div>
+    
+
   </div>
 </div>
 

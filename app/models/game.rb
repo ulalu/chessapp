@@ -4,8 +4,9 @@ class Game < ApplicationRecord
   has_many :pieces
 
   validates :name, presence: true
-  after_create :populate_board
-  
+  after_create :populate_board 
+
+
   
   def stalemate?(color)
     current_pieces = friendly_pieces(color)
@@ -46,7 +47,6 @@ class Game < ApplicationRecord
   def move_friendly_piece(x,y)
     update_attributes(position_x: x, position_y: y)
   end
-
 	
 	
 	def populate_board
@@ -88,7 +88,9 @@ class Game < ApplicationRecord
     King.create(game_id: id, type: 'King', color: 'black', position_x: 3, position_y: 7)
   end
   
+
 end
+
 
 
 

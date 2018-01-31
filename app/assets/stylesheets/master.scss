@@ -36,8 +36,8 @@ h3 {
 .main-nav {
   display: inline-block;
   float: right;
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
+}
 .logo {
   font-family: 'Francois One', sans-serif;
   text-transform: uppercase;
@@ -96,6 +96,51 @@ body {
   margin-left: 10px;
 }
 
+.form-box {
+  background-color: #c1d5e0;
+  padding: 40px;
+}
+
+.create-game h1 {
+  padding-left: 25%;
+  padding-right: 25%;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.create-game form#new_game {
+  margin: 0 auto;
+}
+
+.create-game input#game_name {
+  margin-bottom: 10px;
+}
+.create-game label {
+  color: black;
+  margin-right: 5px;
+}
+
+.create-game input#game_email {
+
+}
+
+.choose-army {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.choose-army h2 {
+  text-align: center;  
+}
+.choose-army .black {
+  width: 100px;
+  margin-left: 5px;
+}
+.choose-army .white {
+  width: 100px;
+  margin-right: 5px;
+}
+
 .row {
   margin: 0 auto;
 }
@@ -135,11 +180,15 @@ body {
     background-image: url("white.png");
     background-position: left;
     border-collapse: collapse;
-    width: 11vh;
-    padding-bottom: 12.5%;
+    width: 100px;
+    height: 100px;
+}
+.cell-highlight {
+  outline-offset: -5px;
+  outline: 5px solid red;
 }
 
-#board td:hover {
+.board td:hover {
   outline-offset: -5px;
   outline: 5px solid #94eded;
 }
@@ -149,7 +198,6 @@ body {
     background-image: url("black.png");
     background-position: left;
     border-collapse: collapse;
-
 }
 
 #board td img{ 
@@ -182,4 +230,19 @@ body {
 
 a {
   color: #61babb;
+}
+
+
+@media (max-width: 900px) {
+  
+  .create-game h1 {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .choose-army {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
 }

@@ -9,6 +9,9 @@ class GamesController < ApplicationController
 		@game = Game.new
 	end
 	
+	# create a method for a flipped board
+	# keep pieces in correct places in database (coordinates)
+
 	def create
 		@game = current_user.games.create(game_create_params)
 		if @game.valid?
@@ -22,11 +25,12 @@ class GamesController < ApplicationController
 		@piece = Piece.find(params[:piece_id])
 		# if @piece.valid_move?(params[:position_x], params[:position_y])
 		# 	@piece.update_attributes(:position_x, :position_y)
-		if true
+		if false
 			render status: 200, json: {valid: true}
 		else
-			render status: :unauthorized, json: {valid: false}
+			flash[:notice] = "Invalid move"
 		end
+
 	end
 
 	def show
@@ -40,7 +44,7 @@ class GamesController < ApplicationController
 	end
 
 	def game_create_params
-		params.require(:game).permit(:name)
+		params.require(:game).permit(:name, :email)
 	end
 
 end
