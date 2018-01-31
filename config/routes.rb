@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   
   root 'static_pages#index'
   resources :games, only: [:new, :create, :show, :index]  do
-	 	put 'move', to: 'games#update'
+	 	put 'move', to: 'games#move'
   end
 end
