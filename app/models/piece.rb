@@ -1,59 +1,54 @@
 class Piece < ApplicationRecord
 
   belongs_to :game
-  
-  # Determines if a piece can be captured
-	def capturable?(x, y)
-	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
-	end
-	
-	# Captures present piece if is capturable (changes db)
-	def capture!(x, y)
-	  if piece_present_at?(x, y)
-		  if capturable?(x, y)
-		    update_captured_piece!(x, y)
-		    move_to!(x, y)
-      end
-		else
-		  move_to!(x, y)
-		end
-	end
-  
-	# Changes captured piece attributes to reflect capture (changes db)
-	def update_captured_piece!(x, y)
-	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil, dead: true)
-	end
-	
-	# Updates a piece location based on given coordinates (changes db)
-	def move_to!(x, y)
-	  self.update_attributes(position_x: x, position_y: y)
-	end
-
+   
+ 	# Captures present piece if is capturable (changes db)
+ 	def capture!(x, y)
+ 	  if piece_present_at?(x, y)
+ 	    if capturable?(x, y)
+ 	      update_captured_piece!(x, y)
+ 	      move_to!(x, y)
+       	    end
+ 	  else
+ 	      move_to!(x, y)
+ 	  end
+ 	end
+   
+ 	# Changes captured piece attributes to reflect capture (changes db)
+ 	def update_captured_piece!(x, y)
+ 	  self.present_piece(x, y).update_attributes(position_x: nil, position_y: nil, dead: true)
+ 	end
+ 	
+ 	# Updates a piece location based on given coordinates (changes db)
+ 	def move_to!(x, y)
+ 	  self.update_attributes(position_x: x, position_y: y)
+ 	end
+ 
   # Checks if a piece is present at given location.
   def piece_present_at?(x, y)
     game.pieces.exists?(position_x: x, position_y: y)
   end
-  
-  # Checks if pieces have same color
-  def is_same_color?(x, y)
-    game.pieces.find_by(position_x: x, position_y: y).color == self.color
-  end
-  
-  # returns a piece object from given coordinates
-  def present_piece(x, y)
-    game.pieces.find_by(position_x: x, position_y: y)
-  end
-  
-  # Determines if a piece can be captured
-  def capturable?(x, y)
-	  (piece_present_at?(x, y)) && !is_same_color?(x, y)
+
+	# Checks if pieces have same color
+	def is_same_color?(x, y)
+ 		game.pieces.find_by(position_x: x, position_y: y).color == self.color
 	end
-  
+
+	# returns a piece object from given coordinates
+	def present_piece(x, y)
+		game.pieces.find_by(position_x: x, position_y: y)
+ 	end
+ 
+# Determines if a piece can be captured
+ def capturable?(x, y)
+	 (piece_present_at?(x, y)) && !is_same_color?(x, y)
+ end
+
   # Determine if space has a piece present and isnt nil
   def obstruction_present?(x, y)
     game.pieces.find_by(position_x: x, position_y: y).nil?
   end
-
+  
   # Determines if Piece color is black
   def black?
     color.eql?('black')
@@ -67,32 +62,32 @@ class Piece < ApplicationRecord
   # Determines if pieces is being moved off board
   def off_the_board?(x, y)
     if (x < 0 || y < 0 || x > 7 || y > 7 )
-      return false
-    else
       return true
+    else
+      return false
     end
   end
   
-  def examine_path(position_x, position_y, end_x, end_y)
-    if position_y == end_y
+  def examine_path(x,y)
+    if position_y == y
       'horizontal'
-    elsif position_x == end_x
+    elsif position_x == x
       'vertical'
-    elsif (end_y - position_y).abs == (end_x - position_x).abs
+    elsif (y - position_y).abs == (x - position_x).abs
       'diagonal'
     end
   end
   
   # Checks checks for horizontal obstruction
-  def horizontal_obstruct?(end_x)
+  def horizontal_obstruct?(x)
     # Checks horizontal left
-    if position_x < end_x 
-      (position_x + 1).upto(end_x - 1) do |x|
+    if position_x < x 
+      (position_x + 1).upto(x - 1) do |x|
         return true if square_occupied?(x, position_y)
       end
     # Checks right
-    elsif position_x > end_x
-      (position_x - 1).downto(end_x + 1) do |x|
+    elsif position_x > x
+      (position_x - 1).downto(x + 1) do |x|
         return true if square_occupied?(x, position_y)
       end
     end
@@ -100,15 +95,15 @@ class Piece < ApplicationRecord
   end
   
   # Checks for vertical obstruction
-  def vertical_obstruct?(end_y)
+  def vertical_obstruct?(y)
     # checks vertical down
-    if position_y < end_y
-      (position_y + 1).upto(end_y - 1) do |y|
+    if position_y < y
+      (position_y + 1).upto(y - 1) do |y|
         return true if square_occupied?(position_x, y)
       end
     # checks vertical up
-    elsif position_y > end_y
-      (position_y - 1).downto(end_y + 1) do |y|
+    elsif position_y > y
+      (position_y - 1).downto(y + 1) do |y|
         return true if square_occupied?(position_x, y)
       end
     end
@@ -116,20 +111,22 @@ class Piece < ApplicationRecord
   end
 
   # Checks for diagonal_obstruction
-  def diagonal_obstruct?(end_x, end_y)
+  def diagonal_obstruct?(x, y)
     # Checks diagonal and down
-    if position_x < end_x
-      (position_x + 1).upto(end_x - 1) do |x|
-        diag_y = x - position_x
-        y = end_y > position_y ? position_y + diag_y : position_y - diag_y
-        return true if square_occupied?(x, y)
+    if position_x < x
+      ((position_x + 1)...x).each do |intermediate_x|
+        y_change = intermediate_x - position_x
+        intermediate_y = y > position_y ? position_y + y_change : position_y - y_change
+        if square_occupied?(intermediate_x, intermediate_y)
+          return true
+        end
       end
     # Checks diagonal and up
-    elsif position_x > end_x
-      (position_x - 1).downto(end_x + 1) do |x|
-        diag_y = position_x - x
-        y = end_y > position_y ? position_y + diag_y : position_y - diag_y
-        return true if square_occupied?(x, y)
+    elsif position_x > x
+      ((x + 1)...position_x).each do |intermediate_x|
+        y_change = position_x - intermediate_x
+        intermediate_y = y > position_y ? position_y + y_change : position_y - y_change
+        return true if square_occupied?(intermediate_x, intermediate_y)
       end
     end
     false
@@ -140,18 +137,29 @@ class Piece < ApplicationRecord
     game.pieces.where(position_x: x, position_y: y).present?
   end
   
+  def examine_path(x, y)
+    if position_y == y
+      'horizontal'
+    elsif position_x == x
+      'vertical'
+    elsif (y - position_y).abs == (x - position_x).abs
+      'diagonal'
+    end
+  end
+  
   # checks the path based on provided coodinates for obstruction
-  def obstructed?(x, y)
-    path = examine_path(position_x, position_y, x, y)
+  def obstructed?(x,y)
+    path = examine_path(x,y)
     
-    if path
-      return horizontal_obstruct?(x) if path == 'horizontal'
-  
-      return vertical_obstruct?(y) if path == 'vertical'
-  
-      return diagonal_obstruct?(x, y) if path == 'diagonal'
+    case path
+    when 'horizontal'
+      horizontal_obstruct?(x)
+    when 'vertical'
+      vertical_obstruct?(y)
+    when 'diagonal'
+      diagonal_obstruct?(x, y)
     else
-      return false
+      false
     end
   end
   
@@ -167,19 +175,41 @@ class Piece < ApplicationRecord
   end
   
   def not_moved_to_different_space?(x,y)
-    position_x == x && y_position == y
+    position_x == x && position_y == y
   end
   
   def is_my_turn?
     #write logic to check for whether it's the piece owner's turn here!
-    #maybe something like... @game.turn == current_player.color???? with the turn defined by color elsewhere?
+    #maybe something like... @game.turcann == current_player.color???? with the turn defined by color elsewhere?
   end
   
-  def valid_move?(x,y)
-    #i'm not sure I'm implementing in check correctly here. second set of eyes would be appreciated!
-    #obstructed?(x,y) && off_the_board?(x,y) && in_check?(king) && not_moved_to_different_space?(x,y) && is_my_turn?
-    #
+
+  def occupied?(x,y)
+	  (piece_present_at?(x,y)) && is_same_color?(x,y)
+	end
+  
+  def valid_move?(x,y,king=nil)
+    return false if obstructed?(x,y) 
+    return false if off_the_board?(x,y)
+    #return false if in_check?(king)
+    return false if not_moved_to_different_space?(x,y)
+    return false if occupied?(x,y)
+    #this portion will need to be refactored based on how turn logic is built
+    #return false if is_my_turn?
+    return true
   end
+  
+  def valid_move_reason(x,y)
+    if !valid_move?(x,y)
+      return 'there is a piece between your start and end point' if obstructed?(x,y) 
+      return "you cannot place your piece off the board" unless off_the_board?(x,y)
+      return "if you make this move your king is in check" if in_check?(king)
+      return "you haven't moved your piece" unless not_moved_to_different_space?(x,y)
+      return "you cannot move a piece on top of your own pieces" if occupied?(x,y)
+      #return "wait for your turn" if is_my_turn?
+    end
     
+  end
   
 end
+
