@@ -6,6 +6,7 @@ class Game < ApplicationRecord
   validates :name, presence: true
   after_create :populate_board 
 
+
   
   def stalemate?(color)
     current_pieces = friendly_pieces(color)
