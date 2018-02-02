@@ -65,4 +65,5 @@ gem 'rails-ujs'
 gem "awesome_print", require:"ap"
 gem 'simple_form'
 gem 'jquery-ui-rails'
+gem 'font-awesome-rails'
 

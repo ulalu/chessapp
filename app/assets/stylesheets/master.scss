@@ -1,6 +1,7 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Francois+One');
 @import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
+@import "font-awesome";
 
 //primary colors are blue-grey-dark: #62757f blue-grey-medium: #90a4ae blue-grey-light: #c1d5e0
 //secondary colors are teal-dark: #61babb teal-medium: #94eded teal-light: #c8ffff
@@ -233,6 +234,29 @@ a {
 }
 
 .vs {
+  color: black;
+  text-align: center;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.rotate {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg); 
+  -moz-transform: rotate(180deg); 
+  -webkit-transform: rotate(180deg); 
+  -o-transform: rotate(180deg); 
+}
+
+#board-view {
+  background-color: black;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  border: none;
+}
+
+.rotation {
   color: black;
   text-align: center;
   margin-left: 20%;

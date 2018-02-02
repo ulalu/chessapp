@@ -4,6 +4,9 @@
     <%= link_to 'Home', root_path, class: 'btn btn-primary' %>
   </div>
 
+    <div class="rotation">
+      <p>Click to rotate the board: <button id="board-view"><% image_tag('black_Pawn.png') %></button></p>
+    </div>
 
     <div class="board-container">
       <table id="board" data-game_id="<%= @game.id %>">

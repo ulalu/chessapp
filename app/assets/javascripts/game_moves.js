@@ -1,4 +1,13 @@
 $(function () {
+  $("#board-view").on( 'click', function (data) { // this should not be on click, but only white_id join
+    $("#board").toggleClass('rotate');
+    $(".piece_image").toggleClass('rotate');
+    console.log(data);
+  });
+});
+
+
+$(function () {
   $('#board td').on( 'click', function (data) {
       $('.cell-highlight').removeClass('cell-highlight');
       $(this).toggleClass('cell-highlight');
