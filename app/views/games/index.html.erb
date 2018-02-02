@@ -8,7 +8,7 @@
         <% @games.each do |game| %>
           <p><%= game.name %>
             <% if game.black_id && game.black_id > 0 && game.white_id && game.white_id > 0 %>
-              <%= game.black_player.email %> vs. <%= game.white_player.email %>
+              <%= game.black_id.email %> vs. <%= game.white_id.email %>
             <% else %> 
               <%= link_to 'Join', game_join_path(game), method: :put %></p>
             <% end %> 
