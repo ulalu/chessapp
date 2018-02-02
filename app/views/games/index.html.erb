@@ -6,7 +6,12 @@
     <div class="row col-10 offset-1">
       <div class="games-list">
         <% @games.each do |game| %>
-          <p><%= game.name %><%= link_to 'Join', game_path(game) %></p>
+          <p><%= game.name %>
+            <% if game.black_id && game.black_id > 0 && game.white_id && game.white_id > 0 %>
+              <%= game.black_player.email %> vs. <%= game.white_player.email %>
+            <% else %> 
+              <%= link_to 'Join', game_join_path(game), method: :put %></p>
+            <% end %> 
         <% end %>
       </div>
     </div>

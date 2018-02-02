@@ -13,12 +13,30 @@ class GamesController < ApplicationController
 	# keep pieces in correct places in database (coordinates)
 
 	def create
-		@game = current_user.games.create(game_create_params)
-		if @game.valid?
+		@game = current_user.games.new(game_create_params)
+		if params[:white_id].present?
+			@game.white_id = current_user.id 
+		else
+			@game.black_id = current_user.id
+		end
+
+		if @game.save
 			redirect_to game_path(@game)
 		else
-			redirect_to root_path, alert: "Could not create game."
+			flash[:error] = @game.errors.full_messages.join(", ")
+			render :new
 		end
+	end
+
+	def join
+		@game = Game.find(params[:game_id])
+		redirect_to game_path(@game)
+			if @game.white_id.present?
+				current_user.id == @game.black_id
+			elsif @game.black_id.present?
+				current_user.id == @game.white_id
+			else
+			end
 	end
 
 	def move
@@ -44,7 +62,7 @@ class GamesController < ApplicationController
 	end
 
 	def game_create_params
-		params.require(:game).permit(:name, :email)
+		params.require(:game).permit(:name, :email, :white_id, :black_id)
 	end
 
 end

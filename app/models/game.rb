@@ -21,6 +21,14 @@ class Game < ApplicationRecord
     return false if possible_moves.any?
     true
   end
+
+  def white_player
+    User.find_by_id(self.white_id)
+  end
+
+  def black_player
+    User.find_by_id(self.black_id)
+  end
   
   def friendly_pieces(color)
    team_color = if color = 'black'

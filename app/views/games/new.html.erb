@@ -24,14 +24,13 @@
       <div class="white">
         <%= image_tag ("white_Knight_flip.png") %>
         <br />
-        <%= f.submit "Play White", class: 'btn white btn-primary' %>
-        <% end %>
+        <%= f.submit "Play White", class: 'btn white btn-primary', name: 'game[white_id]' %>
+        
       </div>
       <div class="black">
         <%= image_tag ("black_Knight.png") %>
         <br />
-        <%= simple_form_for @game, url: games_path do |f| %>
-        <%= f.submit "Play Black", class: 'btn black btn-primary' %>
+        <%= f.submit "Play Black", class: 'btn black btn-primary', name: 'game[black_id]' %>
         <% end %>
       </div>
     </div>

@@ -5,8 +5,6 @@
   </div>
 
 
-<!--   Flip board here -->
-
     <div class="board-container">
       <table id="board" data-game_id="<%= @game.id %>">
           <% 8.times.each do |row| %>
@@ -26,7 +24,10 @@
           <% end %>
       </table>
     </div>
-    
+    <br />
+    <div class="vs">
+      <%= @game.black_id %> vs. <%= @game.white_id %>
+    </div>
 
   </div>
 </div>
