@@ -4,7 +4,7 @@ RSpec.describe Pawn, type: :model do
   
   describe '#valid_move?' do
     let(:user) { FactoryBot.create(:user) }
-    let(:game) { FactoryBot.create(:game, user: user) }
+    let(:game) { FactoryBot.create(:empty_game, user: user) }
     let(:pawn) { FactoryBot.create(:pawn, position_x: 0, position_y: 1,  game: game) }
     
     it "should return true if a valid move" do
