@@ -201,6 +201,7 @@ class Piece < ApplicationRecord
   end
   
   def change_turns
+    valid_move?(x,y)
     if user_id == game.white_id
       game.update_attributes(turn: game.black_id)
     else
