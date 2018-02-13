@@ -25,11 +25,30 @@ class GamesController < ApplicationController
 		@piece = Piece.find(params[:piece_id])
 		# if @piece.valid_move?(params[:position_x], params[:position_y])
 		# 	@piece.update_attributes(:position_x, :position_y)
-		if false
+		#data: {
+		# position_x: $(event.target).data('row'),
+		# 		position_y: $(event.target).data('col'),
+		# 		piece_id: $(ui.draggable).data("piece_id")
+		# }
+
+		position_x = params[:position_x].to_i
+		position_y = params[:position_y].to_i
+		valid_move = @piece.valid_move?(position_x, position_y)
+		puts valid_move
+
+		if valid_move
 			render status: 200, json: {valid: true}
 		else
-			flash[:notice] = "Invalid move"
+			flash[:notice] = "invalid move"
+			#byebug
+			redirect_to action: 'get', id:  game_path(@piece.game_id)
 		end
+
+		# if false
+		# 	render status: 200, json: {valid: true}
+		# else
+		# 	flash[:notice] = "Invalid move"
+		# end
 
 	end
 

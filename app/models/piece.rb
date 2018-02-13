@@ -182,13 +182,17 @@ class Piece < ApplicationRecord
     #write logic to check for whether it's the piece owner's turn here!
     #maybe something like... @game.turcann == current_player.color???? with the turn defined by color elsewhere?
   end
-  
+
+
+
 
   def occupied?(x,y)
 	  (piece_present_at?(x,y)) && is_same_color?(x,y)
 	end
   
   def valid_move?(x,y,king=nil)
+
+    return false if square_occupied?(x, y)
     return false if obstructed?(x,y) 
     return false if off_the_board?(x,y)
     #return false if in_check?(king)
